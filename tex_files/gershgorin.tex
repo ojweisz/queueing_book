@@ -17,7 +17,7 @@ Then the probability that a job starting at $k$, moving to $i$ and then leaving 
 As $P_{ki}>0$ and $P_{i0}>0$, the probability that a job leaves the network from node $k$ in two steps is positive.
 As a matter of fact, $P^2_{k0} = \sum_{j=0}^M P_{kj}P_{j0} \geq P_{ki}P_{i0} > 0$.
 More generally, we assume that the (finite) matrix $P$ is transient, which means that it is possible to leave the network from any station in at most $M$ steps.
-In other words, for any station $j$ there is a sequence of intermediate stations $j_1, j_2, \ldots , j_{M-1}$ such that $P^{M}_{jk} \geq P_{j j_1}P_{j_1 j_2}\cdots P_{j_{M-1}k} > 0$.
+In other words, for any station $j$ there is a sequence of intermediate stations $j_1, j_2, \ldots , j_{M-1}$ such that $P^{M}_{j0} \geq P_{j j_1}P_{j_1 j_2}\cdots P_{j_{M-1}0} > 0$.
 
 \begin{extra}
   What type of networks lead to the longest chains before jobs can leave the network? What routing matrix~$P$ corresponds to such a network? Show that $P^M = 0$ for such networks.
