@@ -1,19 +1,11 @@
-\author{Nicky D. van  Foreest}
-
-\begin{document}
-\frontmatter
-\maketitle
-
-\tableofcontents
-
 \chapter{Introduction}
 \label{cha:introduction}
 %\addcontentsline{toc}{chapter}{Introduction}
 
-\input{tex_files/intro.tex}
+\subfile{intro.tex}
 \clearpage
 
-\input{tex_files/preliminaries.tex}
+\subfile{preliminaries.tex}
 
 \mainmatter
 
@@ -42,10 +34,10 @@ In passing, we develop a number of performance measures to provide insight into 
 
 We expect you to \emph{know all topics} summarized in~\cref{sec:preliminaries}; we use these extensively in~\cref{sec:poisson-distribution} and \cref{sec:expon-distr}, as well as in any other section that introduces some theory.
 
-\input{tex_files/poissondistribution.tex}
-\input{tex_files/constructiondiscretetime.tex}
-\input{tex_files/expdistribution.tex}
-\input{tex_files/constructioncontinuoustime.tex}
+\subfile{poissondistribution.tex}
+\subfile{constructiondiscretetime.tex}
+\subfile{expdistribution.tex}
+\subfile{constructioncontinuoustime.tex}
 
 \chapter{From Transient to Steady-state Analysis}
 \label{cha:from-trans-steady}
@@ -68,13 +60,11 @@ Before introducing these definitions, however, we need to introduce some notatio
 We provide in~\cref{sec:graphical-summaries_1} an overview of the relations we introduce in this chapter.
 
 
-\input{tex_files/kendall.tex}
-\input{tex_files/random_walk.tex}
-\input{tex_files/ratestability.tex}
-\input{tex_files/empiricalperfmeasures.tex}
-\input{tex_files/figure_summaries_1.tex}
-
-
+\subfile{kendall.tex}
+\subfile{random_walk.tex}
+\subfile{ratestability.tex}
+\subfile{empiricalperfmeasures.tex}
+\subfile{figure_summaries_1.tex}
 
 \chapter{Approximate Queueing Models}
 \label{cha:approximate-models}
@@ -103,11 +93,11 @@ With the tools we develop here it becomes possible to analyze various scenarios 
 
 In passing we use some interesting results of probability theory and the Poisson process; we will use these again, for instance in~\cref{cha:queu-contr-open}. 
 
-\input{tex_files/gg1.tex}
-\input{tex_files/setup_times.tex}
-\input{tex_files/adjustments.tex}
-\input{tex_files/failures.tex}
-\input{tex_files/tandem.tex}
+\subfile{gg1.tex}
+\subfile{setup_times.tex}
+\subfile{adjustments.tex}
+\subfile{failures.tex}
+\subfile{tandem.tex}
 
 \chapter{Fundamental tools}
 \label{cha:fundamental-tools}
@@ -120,11 +110,11 @@ Thus, sample paths, which are nothing but the output of a simulation, form an el
 Here we keep the discussion in these notes mostly at an intuitive level; we refer to \cite{el-taha98:_sampl_path_analy_queuein_system} for proofs and further background.
 
 
-\input{tex_files/renewal_reward.tex}
-\input{tex_files/levelcrossing.tex}
-\input{tex_files/pasta.tex}
-\input{tex_files/little.tex}
-\input{tex_files/figure_summaries_2.tex}
+\subfile{renewal_reward.tex}
+\subfile{levelcrossing.tex}
+\subfile{pasta.tex}
+\subfile{little.tex}
+\subfile{figure_summaries_2.tex}
 
 \chapter{Exact Queueing Models}
 \label{cha:analytical-models}
@@ -142,14 +132,14 @@ Quite a number of exercises in this chapter are targeted on \emph{checking} that
 The reader should understand the importance of such checks.
 These exercises are simple in a sense---it is perfectly clear what to do, there is no model to make for instance---, but the algebra can be quite tough at times, and hence it is good practice.
 
-\input{tex_files/mm1.tex}
-\input{tex_files/mnmn1.tex}
-\input{tex_files/mxm1_pk.tex}
-\input{tex_files/mg1.tex}
-\input{tex_files/batcharrivals.tex}
-\input{tex_files/mg1distributionqueuelength.tex}
-% \input{tex_files/relationmxm1andmg1.tex}
-%\input{tex_files/mg1density.tex}
+\subfile{mm1.tex}
+\subfile{mnmn1.tex}
+\subfile{mxm1_pk.tex}
+\subfile{mg1.tex}
+\subfile{batcharrivals.tex}
+\subfile{mg1distributionqueuelength.tex}
+% \subfile{relationmxm1andmg1.tex}
+%\subfile{mg1density.tex}
 
 
 \chapter{Queueing Control and Open Networks}
@@ -181,18 +171,20 @@ This idea underlies Markov decision theory, which in turn provides the theoretic
 Thus, while this chapter closes our journey on the study of queueing system, it is a first step toward a much longer journey on the diverse applications of the probability theory. 
 
 
-\input{tex_files/n_policies_mm1.tex}
-\input{tex_files/n_policies_mg1.tex}
-\input{tex_files/open_single_class.tex}
-\input{tex_files/gershgorin.tex}
+\subfile{n_policies_mm1.tex}
+\subfile{n_policies_mg1.tex}
+\subfile{open_single_class.tex}
+\subfile{gershgorin.tex}
 
 
 
-%\input{tex_files/deterministic_networks.tex}
-%\input{tex_files/gordon_newell.tex}
-%\input{tex_files/convolution.tex}
-%\input{tex_files/mva.tex}
-%\input{tex_files/mda.tex}
+%subfile{inventory_queueing.tex}
+%\subfile{deterministic_networks.tex}
+%\subfile{gordon_newell.tex}
+%\subfile{convolution.tex}
+%\subfile{mva.tex}
+%\subfile{mda.tex}
+
 
 
 \backmatter
@@ -206,20 +198,13 @@ Thus, while this chapter closes our journey on the study of queueing system, it 
 \chapter{Notation}
 \label{sec:notation}
 %\addcontentsline{toc}{chapter}{Notation}
-\input{tex_files/notation.tex}
+\subfile{notation.tex}
 
 \chapter{Formula Sheet}
 %\addcontentsline{toc}{chapter}{Formula Sheet}
-\input{tex_files/formula_sheet.tex}
+\subfile{formula_sheet.tex}
 
 \addcontentsline{toc}{chapter}{Index}
 \phantomsection
 \printindex
 
-\end{document}
-
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "companion"
-%%% End:
