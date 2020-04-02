@@ -1,0 +1,234 @@
+\section{Inventory systems}
+
+The models of \cref{cha:analytical-models} allow us also to analyze several fundamental inventory systems.
+In this section we will see how to do this with by means of a number of exercises. 
+
+
+
+
+
+\begin{exercise}[Fast food restaurants] \clabel{ex:7}
+
+Typically, customers of fast-food restaurants prefer to be served directly from stock so that they do not have to wait for their product(s) to be prepared.
+For this reason fast-food restaurants often use a \emph{produce-up-to policy}, which works as follows.
+When the items on stock, also called the \emph{on-hand} inventory level, is below some threshold $S$, the cook makes items until the inventory level reaches $S$ again.
+The level $S$ is known as the \emph{order-up-to level}, and $S-1$ as the \emph{reorder level} because when the inventory becomes $S-1$ or lower, products will be reordered.
+Customers that cannot be served directly from on-hand stock are \emph{backlogged} which means that they have to wait until their product is made.
+
+Suppose that customers arrive as a Poisson process with rate $\lambda$ and the production times of single items are i.i.d.
+and exponentially distributed with parameter $\mu$.
+
+Relate the behavior of the inventory level $I$ to the queue length process of the $M/M/1$ queue. When are customers backlogged? 
+
+\begin{hint}
+ Realize that a customer for an item (a demand in the inventory system) can be seen as a job at the queueing system.
+ In other words, a demand of a customer becomes a job for the cook.
+ With this idea, note that the number of items to be produced are the number of jobs in queue.
+\end{hint}
+
+\begin{solution}
+ If the inventory level $I(t)=S$, there is nothing to do.
+ When $I(t)=S-1$, the cook has one product to make.
+ In general, when $I(t)=S-n$, the cook has to make $n$ items.
+ But the number of products that the cook has to make, is the same as the number of jobs that stand in queue.
+ Thus, if $L(t)$ is the number of jobs in an $M/M/1$ queue, $I(t) = S-L(t)$ is the inventory level.
+
+Customers are backlogged when $I(t)<0$, thus, when the number of jobs $L(t) > S$. 
+
+\end{solution}
+\end{exercise}
+
+
+
+
+\begin{exercise}[Continuation of \cref{ex:7}] \clabel{ex:96} 
+Backlogging customers leads to dissatisfaction.
+ Clearly, then, the fraction of backlogged demand can be reduced by making $S$.
+ However, when $S$ is large, the average number of items on-hand increases.
+ Of course, produced items cannot lie for a long-time in the chute, because the (visual) quality of the product decreases.
+ As a consequence the restaurant has to balance backlog fractions against average holding times of on-hand items. 
+
+ Use the $M/M/1$ queueing formulas to find expressions for the probability that a customers sees an on-hand inventory level of $i$, the fraction of customers backlogged, the average on-hand inventory level, and the average number of customer in backlog.
+ What expressions do you get for $S$ very large.
+\begin{solution}
+ When $I(t)=i$, then $L(t) = S-I(t) = S -i$.
+ Thus $\P{I(t) = i} = \pi(S-i)$, where $\pi(n) = (1-\rho)\rho^i$ which we know from the analysis of the $M/M/1$ queue.
+ The fraction of backlogged customers is the fraction of customers that sees $I(t) < 0$.
+ But then, $I(t) < 0 \iff S - L(t) < S \iff L(t) > S$.
+ The probability that the $M/M/1$ queue contains $S$ or more jobs is $\P{L> S}$.
+ By the PASTA property this is equal to $\sum_{n=S+1}^\infty \pi(n)$.
+ Now we know that
+ \begin{align*}
+ \P{L\leq S} &= (1-\rho)\sum_{n=0}^S \rho^n = (1-\rho)\frac{1-\rho^{S+1}}{1-\rho} = 1-\rho^{S+1},
+ \end{align*}
+ and therefore
+ \begin{align*}
+\P{I<0} = \P{L>S} = \rho^{S+1}.
+ \end{align*}
+
+Write $I^+ = I\1{I\geq0}$ for the on-hand inventory, and $I^- = -I\1{I<0}$ for the backlogged demand.
+Then note that $I=I^+ - I^-$.
+With this, the average on-hand inventory becomes
+\begin{align*}
+\E{I^+} = \E{I \1{I\geq 0}} = \E{(S-L)\1{S\geq L}} = S\P{L\leq S} - \sum_{n=0}^S n \pi(n) = S(1-\rho^{S+1}) - 
+ (1-\rho) \sum_{n=0}^S n\rho^n.
+\end{align*}
+This cannot be simplified further; we need a computer to evaluate the sum. 
+
+Finally, the average backlog level is
+\begin{align*}
+ \E{I^-} = \E{I^+} - \E{I} = \E{I^+} - \E{S-L} = \E{I^+} - S + \E{L}.
+\end{align*}
+
+If $S\gg 1$, then we see from the above that $\P{I<0} \approx 0$, $\E{I^+} \approx S -\E{L}$ and $\E{I^-} \approx 0$, precisely as we should expect. 
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}[Continuation of \cref{ex:96}]\clabel{ex:l-181}
+ Given an order-up-to level $S$, what is the average time an item spends on the shelf? What is the average time a customer spends in backlog?
+ \begin{hint}
+ Little's law.
+ \end{hint}
+ \begin{solution}
+ Demand arrives for the items on stock at a rate $\lambda$. The expected number of items on stock is $\E{I^+}$. Thus, with Little's law, the average time on the shelf is $\E{I^+}/\lambda$. 
+
+ The queue with customers in backlog is served
+
+ \end{solution}
+
+ We are also interested in the shelf life. Products are not allowed to lie on shelf longer than 30 minutes. What should $S$ be? 
+\end{exercise}
+
+
+
+
+
+There exists an interesting relation between inventory and queueing systems, cf.~\cref{fig:inv_queue}.
+When a job arrives in the queueing system, the virtual workload~$V(t)$ increases by the service time of the job.
+In the inventory system, the inventory $I(t)$ decreases by the demand size of the customer.
+Like this, the demand size of a customer at the inventory system converts into a service time of a job in a queueing system.
+In the figure, the demand size $D_1$ of the first customer corresponds to a production time of duration $S_1=D_1$, and so on.
+Thus, even though in the inventory system, customers do not have to wait, their demands spawn production times at a server who has to replenish the consumed items.
+
+Assume now that the inventory process is controlled by an order-up-to policy: produce (refill the inventory) as long as the inventory level is below $S$ and stop otherwise. Then the figure shows that the inventory level $I(t)$ is equal to $S-V(t)$. 
+
+In more general terms, in a queueing system or an inventory system, there is always `something' or `somebody' waiting. Items in a supermarket are produced ahead of the moment they are `consumed', hence they `wait' for customers. In a queueing system, customers are waiting while their product is `produced' by the server. When there are no customers in a queueing system, the server waits until a new customers comes along. Thus, queueing and inventory theory are both focused on the distribution of waiting times, either by customers, servers, or items, hence both are related branches of (applied) probability theory.
+
+
+\begin{figure}[th]
+\begin{center}
+\begin{tikzpicture}[yscale=0.5]
+\draw[->] (0,0) -- coordinate (x axis mid) (8.5,0);
+\draw[->] (0,0) -- coordinate (y axis mid) (0,10.5);
+\node[below=0.2cm] at (x axis mid) {$t$};
+
+\draw plot coordinates {(1,0) (1,2) (2,1) (2,4) (4,2) (4,4.2) (7.5,0)};
+\node[left] at (7,2.5) {$V(t)$};
+\node[fill=white, rotate=90] at (1,1) {$S_1$};
+\node[fill=white, rotate=90] at (2,2.5) {$S_2$};
+\node[fill=white, rotate=90] at (4,3.) {$S_3$};
+
+\node at (7,5) {$V(t)=S-I(t)$};
+
+\draw[dotted] (0,10)--(8.5,10);
+\node[left] at (0,10) {$S$};
+\node[left] at (7,7.5) {$I(t)$};
+\draw plot coordinates {(1,10) (1,8) (2,9) (2,6) (4,8) (4,6.0) (7.5,10)};
+\node[fill=white, rotate=90] at (1,9) {$D_1$};
+\node[fill=white, rotate=90] at (2,7.5) {$D_2$};
+\node[fill=white, rotate=90] at (4,7) {$D_3$};
+\end{tikzpicture}
+\end{center}
+\caption{The relation between inventory and queueing systems. Here $I(t)$ models the evolution of the inventory level in an inventory system, while $V(t)$ shows the virtual workload, and $S$ is the order-up-to level. When a customer requires $D_1$ items, say, it takes a server of a time $S_1=D_1$ to produce these items. Thus, demands at the inventory system convert into production times in a queueing system. When the inventory is always replenished to level $S$, then the shortage of the inventory level relative to $S$, i.e., $S-I(t)$, becomes the workload $V(t)$ for the server in terms of amount of items or production time.} \label{fig:inv_queue}
+\end{figure}
+
+
+
+
+\begin{exercise}\clabel{ex:l-182}
+ In a production environment, a machine replenishes an inventory of items (e.g., hamburgers) at a fixed rate of $1$ per 3 minutes.
+ If the inventory reaches the \emph{produce-up-to} level $S$, the machine stops.
+ Customers arrive at rate of 6 per hour.
+ A customer can buy items in different quantities, $B=1,2,3,4$, all with equal probability.
+ What is a sensible value for the produce-up-to level $S$?
+\begin{hint}
+Realize that the inventory process $I(t)$ behaves as $I(t)=S-L(t)$ where $L(t)$ is a suitable queueing process. Refer to Ex.~\cref{ex:7} for further background.
+\end{hint}
+\begin{solution}
+Consider a queueing system with job
+arrival rate $\lambda=6$ per hour and the jobs have batch sizes as
+indicated in the problem. The average number of items in the system
+follows like this:
+ \begin{align*}
+ \E B &= \frac{1+2+3+4}{4} = \frac 52, \\
+ \E{B^2} &= \frac{1+4+9+16}{4} = \frac{30}4,\\
+ \V{B} &= \frac{30}4 - \frac{25}4 = \frac 5 4,\\
+ C_s^2 &= \frac{5/4}{25/4} = \frac 15,\\
+ \rho &= \lambda \E B \E S = 6 \frac 52 \frac 1{20} = \frac 34.
+ \end{align*}
+Hence, 
+\begin{equation*}
+ \E{L} = \frac {1+1/5}2 \frac{3/4}{1/4} \frac 52 + \frac 12 \frac{3/4}{1/4} = 6.
+\end{equation*}
+
+Thus, if the level is set to $S=4$, then on average there will be two
+items short. Clearly, then, $S$ should be at least $6$. However,
+$\E{L}$ is just the average. Roughly speaking, in this case half of
+the demand will then be lost. So, if we take variability into account,
+$S$ should be quite a bit bigger than 6. 
+
+A more detailed analysis is
+necessary to determine the right value of $S$ such that not more than
+a certain fraction of demand is lost. We will address this issue in~\cref{sec:batch-arrivals}.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[Inventory control]\clabel{ex:l-183} 
+The recursions used in the
+ exercises above can also be applied to analyze inventory control
+ policies. Consider a production system that can produce maximally
+ $M_k$ items per week during normal working hours, and maximally
+ $N_k$ items during extra (weekend and evening) hours. Let, for
+ period $k$,
+ \begin{align*}
+ D_k &= \text{Demand in week $k$}, \\
+ S_k &= \text{Sales, i.e., number of items sold, in week $k$}, \\
+ r_k &= \text{Revenue per item sold in week $k$}, \\
+ X_k &= \text{Number of items produced in week $k$ during normal hours}, \\
+ Y_k &= \text{Number of items produced in week $k$ during extra hours}, \\
+ c_k &= \text{Production cost per item during normal hours}, \\
+ d_k &= \text{Production cost per item during extra hours}, \\
+ h_k &= \text{Holding cost per item, due at the end of week $k$}, \\
+ I_k &= \text{On hand inventory level at the end of week $k$}. \\
+ \end{align*}
+ Management needs a production plan that specifies for the next $T$ weeks the number of items to be produced per week.
+ Formulate this problem as an LP problem, taking into account the inventory dynamics.
+ Assume that demand must be met from on-hand inventory.
+\begin{hint}
+Formulate the decision variables/controls, the
+ objective and the constraints. 
+\end{hint}
+\begin{solution}
+ The decision variables are $X_k$, $Y_k$ and $S_k$ (note, it is not
+ necessary to meet all demand: the production cost and profit
+ may vary per period). The objective is 
+ \begin{equation*}
+ \max \sum_{k=1}^T (r_kS_k -c_k X_k - d_k Y_k - h_k I_k).
+ \end{equation*}
+The constraints are 
+\begin{align*}
+ 0&\leq S_k \leq D_k, \\
+ 0&\leq X_k \leq M_k, \\
+ 0&\leq Y_k \leq N_k, \\
+ I_k&=I_{k-1}+X_k+Y_k - S_k. \\
+I_k &\geq 0.
+\end{align*}
+\end{solution}
+\end{exercise}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../companion"
+%%% End:

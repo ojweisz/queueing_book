@@ -1,5 +1,6 @@
 \documentclass[11pt]{book}
 \title{Analysis of Queueing Systems with  Sample Paths and Simulation }
+\author{Nicky D. van  Foreest}
 
 \newif\ifshowextra
 \showextrafalse
@@ -10,7 +11,12 @@
 \usepackage{xr}
 \externaldocument[C-]{companion}
 
-\input{book_contents.tex}
+\begin{document}
+\frontmatter
+\maketitle
+\tableofcontents
+\subfile{book_contents}
+\end{document}
 
 %%% Local Variables:
 %%% mode: latex

@@ -1,3 +1,9 @@
+\documentclass[companion]{subfiles}
+
+
+\begin{document}
+
+
 \section{$M/M/1$ queue}
 %{$\mathbf{M/M/1}$ queue}
 \label{sec:mm1}
@@ -44,63 +50,101 @@ Then, with a bit of algebra,
 
 
 \begin{extra}
- What is the interpretation of $\sum_{n=1}^\infty p(n)$?
+  What is the interpretation of $\sum_{n=1}^\infty p(n)$?
+\begin{hint}
+What is the meaning of $p(0)$?    
+\end{hint}
 \begin{solution}
-First, note that $p(0)$ must be the fraction of time the server is idle.
-Hence, the fraction of time the server is busy, i.e., the utilization, is
+  First, note that $p(0)$ must be the fraction of time the server is idle.
+  Hence, the fraction of time the server is busy, i.e., the utilization, is
 \begin{equation*}
  1-p(0) = \rho = \sum_{n=1}^\infty p(n).
 \end{equation*}
-Here the last equation has the interpretation of the fraction of time
-the system contains at least 1 job. 
+Here the last equation has the interpretation of the fraction of time the system contains at least 1 job.
 \end{solution}
 \end{extra}
 
 
-\begin{extra} \clabel{ex:12}
-Derive~\cref{eq:el} with indicator functions.
+\begin{extra}\clabel{ex:12}
+Derive the expression for $\E L$ in~\cref{eq:el} by means of indicator variables.
 \begin{solution}
 A bit long, but I spell out every step:
 \begin{align*}
-\E L &= \sum_{n=0}^\infty n p(n) \\
-&= \sum_{n=0}^\infty \sum_{i=1}^n \1{i\leq n} p(n) && n=\sum_{i=1}^n \1{i\leq n}\\
+\E L &= \sum_{n=0}^\infty n p(n) = \sum_{n=0}^\infty \sum_{i=1}^n \1{i\leq n} p(n) && n=\sum_{i=1}^n \1{i\leq n}\\
 &= \sum_{n=0}^\infty \sum_{i=1}^\infty \1{i\leq n} p(n) && i>n\implies \1{i\leq n} = 0\\
-&= \sum_{i=1}^\infty \sum_{n=0}^\infty \1{i\leq n} p(n) &&\text{Fubini} \\
-&= \sum_{i=1}^\infty \sum_{n=i}^\infty p(n) && n < i \implies \1{i\leq n}=0 \\
+&= \sum_{i=1}^\infty \sum_{n=0}^\infty \1{i\leq n} p(n) = \sum_{i=1}^\infty \sum_{n=i}^\infty p(n) && n < i \implies \1{i\leq n}=0 \\
 &= \sum_{i=1}^\infty \sum_{n=i}^\infty (1-\rho)\rho^n && p(n) = (1-\rho)\rho^n \\
 &= \sum_{i=1}^\infty \sum_{n=0}^\infty (1-\rho)\rho^{n+i} && n\to n+i \\
 &= \sum_{i=1}^\infty (1-\rho)\rho^i \sum_{n=0}^\infty \rho^n && \rho^{n+i}=\rho^i \rho^n\\
-&= \sum_{i=1}^\infty (1-\rho)\rho^i \frac1{1-\rho} \\
-&= \sum_{i=1}^\infty \rho^i \\
-&= \sum_{i=0}^\infty \rho^{i+1} && i\to i+1\\
-&= \rho \sum_{i=0}^\infty \rho^i \\
-&= \frac{\rho}{1-\rho}.
+&= \sum_{i=1}^\infty (1-\rho)\rho^i \frac1{1-\rho} = \sum_{i=1}^\infty \rho^i = \sum_{i=0}^\infty \rho^{i+1} && i\to i+1\\
+&= \rho \sum_{i=0}^\infty \rho^i = \frac{\rho}{1-\rho}.
 \end{align*}
 Note that, since the summands are positive, we can use Fubini's theorem
 to justify the interchange of the summations.
 \end{solution}
 \end{extra}
 
-\begin{exercise} \clabel{ex:14}
-Derive ~\cref{eq:el} by differentiating the left-hand and right-hand side of
- the standard formula for a geometric series: $\sum_{n=0}^{\infty}\rho^n = (1-\rho)^{-1}$ for $|\rho| < 1$. 
+
+\begin{extra} Show that
+\begin{equation}\label{eq:80}
+ \E{L^2}= (1-\rho) \sum_{n=0}^\infty n^2 \rho^n = \frac{2\rho^2}{(1-\rho)^2} + \frac{\rho}{1-\rho}
+\end{equation}
+by noting that $\sum_{i=1}^n i= n(n+1)/2$ from which we get that $n^2 = -n + 2\sum_{i=1}^n i$.
+Substitute this relation into $\sum_n n^2 \rho^n$ and simplify.
+\begin{solution}
+\begin{align*}
+ \sum_{n=0}^\infty n^2 \rho^n 
+&= \sum_{n=0}^\infty \left(\sum_{i=1}^\infty 2i \1{i\leq n} - n\right)\rho^n 
+= \sum_{n=0}^\infty \sum_{i=0}^\infty 2i\1{i\leq n}\rho^n - \sum_{n=0}^\infty n\rho^n 
+= \sum_{i=0}^\infty 2i \sum_{n=i}^\infty \rho^n - \frac{\E L}{1-\rho}  \\
+&= \sum_{i=0}^\infty 2i \rho^i \sum_{n=0}^\infty \rho^n - \frac{\E L}{1-\rho} 
+= \frac2{1-\rho} \sum_{i=0}^\infty i \rho^i - \frac{\E L}{1-\rho} 
+= \frac2{(1-\rho)^2} \E L - \frac{\E L}{1-\rho} \\
+&= \frac{\E L}{1-\rho} \left(\frac2{1-\rho} - 1\right) 
+= \frac{\E L}{1-\rho} \frac{1+\rho}{1-\rho} \\
+&= \frac{\rho}{1-\rho} \frac{1+\rho}{(1-\rho)^2}.
+\end{align*}
+\end{solution}
+\end{extra}
+
+\begin{extra}\clabel{ex:14} Derive the expression for $\E L$ in~\cref{eq:el} by differentiating the left-hand and right-hand side of the standard formula for a geometric series $\sum_{n=0}^{\infty}\rho^n = (1-\rho)^{-1}$ for $\rho < 1$.
 \begin{hint}
- Observe that we just need to compute the first second moment of a geometric random variable.
+ Observe that we just  compute the first moment of a geometric random variable.
 \end{hint}
 \begin{solution}
-Differentiate the left- and right-hand side with respect to
-$\rho$ and then multiply with $\rho$ to get
+  Differentiate the left- and right-hand side of $(1-\rho)^{-1} = \sum_{n=0}^\infty \rho^n$ with respect to $\rho$ and then multiply with $\rho$ to get
 \begin{equation*}
 \dfrac{\rho}{(1-\rho)^2}=\sum_{n=0}^{\infty}n\rho^n.
 \end{equation*}
-Then multiply both sides by $1-\rho$ (recall that $p(n) = (1-\rho)\rho^n$).
+Then multiply both sides by $1-\rho$ and use that $p(n) = (1-\rho)\rho^n$.
 
-Differentiating twice gives $\E{L^2}$, after which $\V L$ follows easily.
 \end{solution}
-\end{exercise}
+\end{extra}
+
+
+
+\begin{extra}\clabel{ex:56}
+  Derive~\cref{eq:80} by twice differentiating the standard formula for a geometric series.
+\begin{solution}
+ Starting from the result of~\cref{ex:14}, differentiating and multiplying with $\rho$ a second time yields
+\begin{align*}
+\rho \frac{(1-\rho)^2 + \rho2(1-\rho)}{(1-\rho)^4} &= \rho \frac{1-2\rho+\rho^2 + 2\rho-2\rho^2}{(1-\rho)^4} 
+                                                     = \rho \frac{1-\rho^2}{(1-\rho)^4} \\
+  &=\rho \dfrac{1+\rho}{(1-\rho)^3}=\sum_{n=0}^{\infty}n^2\rho^n,
+\end{align*}
+and hence
+\begin{align*}
+  (1-\rho)\sum_{n=0}^{\infty}n^2\rho^n
+  &= \rho\dfrac{1+\rho}{(1-\rho)^2}  = \dfrac{\rho}{(1-\rho)^2} + \dfrac{\rho^2}{(1-\rho)^2}
+    = \dfrac{2\rho^2}{(1-\rho)^2} + \dfrac{\rho}{(1-\rho)^2} - \dfrac{\rho^2}{(1-\rho)^2} \\
+  &= \dfrac{2\rho^2}{(1-\rho)^2} + \rho\dfrac{(1-\rho)}{(1-\rho)^2} = \dfrac{2\rho^2}{(1-\rho)^2} + \dfrac{\rho}{(1-\rho)^2}.
+\end{align*}
+Recall that $p(n) = (1-\rho)\rho^n$. 
+\end{solution}
+\end{extra}
 
 \begin{extra}\clabel{ex:34}
- Now use moment-generating functions to derive~\cref{eq:el}. 
+Use moment-generating functions to derive the expression for $\E L$ in~\cref{eq:el}. 
 \begin{solution}
 \begin{equation*}
  \begin{split}
@@ -117,57 +161,7 @@ Hence, $\E L = M_L'(0) = \rho/(1-\rho)$.
 \end{extra}
 
 
-
-\begin{extra}\clabel{ex:56}
- Derive
-\begin{equation}\label{eq:80}
- \E{L^2}= (1-\rho) \sum_{n=0}^\infty n^2 \rho^n = \frac{2\rho^2}{(1-\rho)^2} + \frac{\rho}{1-\rho}
-\end{equation}
-by differentiating the standard formula for a geometric series twice.
-\begin{solution}
- Starting from the result of~\cref{ex:14}, differentiating and multiplying with $\rho$ a second time yields
-\begin{align*}
-\rho \frac{(1-\rho)^2 + \rho2(1-\rho)}{(1-\rho)^4} 
-&= \rho \frac{1-2\rho+\rho^2 + 2\rho-2\rho^2}{(1-\rho)^4} \\
-&= \rho \frac{1-\rho^2}{(1-\rho)^4} \\
-&=\rho \dfrac{1+\rho}{(1-\rho)^3}\\
-&=\sum_{n=0}^{\infty}n^2\rho^n,
-\end{align*}
-and hence
-\begin{align*}
-(1-\rho)\sum_{n=0}^{\infty}n^2\rho^n = \rho\dfrac{1+\rho}{(1-\rho)^2} 
-& = \dfrac{\rho}{(1-\rho)^2} + \dfrac{\rho^2}{(1-\rho)^2}  \\
-& = \dfrac{2\rho^2}{(1-\rho)^2} + \dfrac{\rho}{(1-\rho)^2} - \dfrac{\rho^2}{(1-\rho)^2}\\
-& = \dfrac{2\rho^2}{(1-\rho)^2} + \rho\dfrac{(1-\rho)}{(1-\rho)^2}\\
-& = \dfrac{2\rho^2}{(1-\rho)^2} + \dfrac{\rho}{(1-\rho)^2}.
-\end{align*}
-Recall that $p(n) = (1-\rho)\rho^n$. 
-\end{solution}
-\end{extra}
-
-
-\begin{extra} Show~\cref{eq:80} by noting that
-$\sum_{i=1}^n i= n(n+1)/2$ from which we get that
-$n^2 = -n + 2\sum_{i=1}^n i$. Substitute this relation into
-$\sum_n n^2 \rho^n$ and simplify.
-\begin{solution}
-\begin{align*}
- \sum_{n=0}^\infty n^2 \rho^n 
-&= \sum_{n=0}^\infty \left(\sum_{i=1}^\infty 2i \1{i\leq n} - n\right)\rho^n 
-= \sum_{n=0}^\infty \sum_{i=0}^\infty 2i\1{i\leq n}\rho^n - \sum_{n=0}^\infty n\rho^n \\
-&= \sum_{i=0}^\infty 2i \sum_{n=i}^\infty \rho^n - \frac{\E L}{1-\rho} 
-= \sum_{i=0}^\infty 2i \rho^i \sum_{n=0}^\infty \rho^n - \frac{\E L}{1-\rho} \\
-&= \frac2{1-\rho} \sum_{i=0}^\infty i \rho^i - \frac{\E L}{1-\rho} 
-= \frac2{(1-\rho)^2} \E L - \frac{\E L}{1-\rho} \\
-&= \frac{\E L}{1-\rho} \left(\frac2{1-\rho} - 1\right) 
-= \frac{\E L}{1-\rho} \frac{1+\rho}{1-\rho} \\
-&= \frac{\rho}{1-\rho} \frac{1+\rho}{(1-\rho)^2}.
-\end{align*}
-\end{solution}
-\end{extra}
-
-\begin{extra} Derive~\cref{eq:80} by
- using the moment-generating functions.
+\begin{extra} Derive~\cref{eq:80} by using moment-generating functions.
 \begin{solution}
 Using the results of~\cref{ex:34} gives
 \begin{equation*}
@@ -176,13 +170,39 @@ Using the results of~\cref{ex:34} gives
 \end{solution}
 \end{extra}
 
-\begin{extra} Show that for the $M/M/1$ queue $\V L = \rho/(1-\rho)^2$.
+\begin{extra}\clabel{ex:mm1-32} Show that for the $M/M/1$ queue $\V L = \rho/(1-\rho)^2$.
 \begin{solution}
 \begin{equation*}
 \V L = \E{L^2} - (\E L)^2 = \frac{\rho(1+\rho)}{(1-\rho)^2}-\frac{\rho^2}{(1-\rho)^2} = \frac{\rho}{(1-\rho)^2}.
 \end{equation*}
 \end{solution}
 \end{extra}
+
+\begin{extra}\label{ex:mm1-1}
+  Show that the excess probability $\P{L\geq n} = \rho^n$.
+\begin{hint}
+$\P{L\geq n} = \sum_{k\geq n} p(k)$.
+\end{hint}
+\begin{solution}
+ \begin{equation*}
+ \begin{split}
+ \P{L\geq n} 
+ &= \sum_{k=n}^\infty p(k) = \sum_{k=n}^\infty p(0)\rho^k = (1-\rho)\sum_{k=n}^\infty \rho^k \\
+ &= (1-\rho)\rho^n \sum_{k=0}^\infty\rho^k = (1-\rho) \rho^n \frac1{1-\rho} = \rho^n.
+\end{split}
+\end{equation*}
+\end{solution}
+\end{extra}
+
+
+
+\begin{exercise}\clabel{ex:mm138}
+Derive~\cref{eq:el} in three ways: by using indicator variables, by means of the expression $(1-\rho)^{-1} = \sum_{n=0}^\infty \rho^n$, and with  moment-generating functions.
+(This is a good exercise to train your calculus and algebra skills.)
+\begin{solution}
+See \cref{ex:12} to \cref{ex:mm1-1}.
+\end{solution}
+\end{exercise}
 
 \begin{extra}
 Show that for the $M/M/1$ queue the SCV of $L$ is $1/\rho$. What do you conclude from this?
@@ -203,32 +223,13 @@ distribution.
 
 
 \begin{extra}
- Show that the excess probability, i.e., the probability that a long queue occurs, is 
-$\P{L\geq n} = \rho^n$.
-\begin{hint}
-$\P{L\geq n} = \sum_{k\geq n} p(k)$.
-\end{hint}
-\begin{solution}
- \begin{equation*}
- \begin{split}
- \P{L\geq n} 
- &= \sum_{k=n}^\infty p(k) = \sum_{k=n}^\infty p(0)\rho^k = (1-\rho)\sum_{k=n}^\infty \rho^k \\
- &= (1-\rho)\rho^n \sum_{k=0}^\infty\rho^k = (1-\rho) \rho^n \frac1{1-\rho} = \rho^n.
-\end{split}
-\end{equation*}
-\end{solution}
-\end{extra}
-
-
-\begin{extra}
  Explain that for the $M/M/1$ queue $\E{L_Q} = \sum_{n=1}^\infty (n-1)\pi(n)$ and use this to find that $\E{L_Q}=\rho^2/(1-\rho)$.
 \begin{solution}
  The fraction of time the system contains $n$ jobs is $\pi(n)$ (by
  PASTA). When the system contains $n>0$ jobs, the number in queue
  is one less, i.e., $n-1$.
 
- \begin{equation*}
- \begin{split}
+ \begin{align*}
 \E{L_Q} 
 &= \sum_{n=1}^\infty (n-1)\pi(n) 
 = (1-\rho)\sum_{n=1}^\infty (n-1) \rho^n\\
@@ -236,18 +237,15 @@ $\P{L\geq n} = \sum_{k\geq n} p(k)$.
 = \rho \sum_{n=1}^\infty (n-1) \pi(n-1)\\
 &= \rho \sum_{n=0}^\infty n \pi(n)
 = \rho \frac{\rho}{1-\rho}.
- \end{split}
- \end{equation*}
+ \end{align*}
 
 Another way to get the same result is by splitting: 
-\begin{equation*}
- \begin{split}
+\begin{align*}
 \E{L_Q} 
 &= \sum_{n=1}^\infty (n-1)\pi(n) 
 =\sum_{n=1}^\infty n\pi(n) -\sum_{n=1}^\infty \pi(n)\\
 &= \E L - (1-\pi(0)) = \E L - \rho.
- \end{split}
-\end{equation*}
+\end{align*}
 \end{solution}
 \end{extra}
 
@@ -483,8 +481,9 @@ hour $t$.
 }
 
 
+\end{document}
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../companion"
+%%% TeX-master: t
 %%% End:

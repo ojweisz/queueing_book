@@ -12,7 +12,7 @@
 \usepackage{mathtools,amsthm,amssymb,amsmath}
 \usepackage{verbatim}
 \usepackage{ifthen}
-\usepackage{comment}
+
 
 \numberwithin{equation}{section}
 
@@ -33,7 +33,7 @@
 \usepackage{pythontex}
 
 % to use the adjustwidth environment
-\usepackage[strict]{changepage}
+%\usepackage[strict]{changepage}
 %\begin{adjustwidth}{hleftmargini}{hrightmargini}
 
 % \setlength{\parindent}{0ex}
@@ -50,6 +50,10 @@
 % %\end{adjustwidth}
 % \end{exer}
 % }
+
+\usepackage{subfiles}
+% load subfiles before the comment package to avoid problems during compiliaton.
+\usepackage{comment}
 
 \ifshowextra
 \newenvironment{extra}{\begin{exercise}}{\end{exercise}}
@@ -168,4 +172,3 @@
 
 \graphicspath{{../figures/}}
 
-\usepackage{subfiles}
