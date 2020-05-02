@@ -1,3 +1,7 @@
+% arara: pdflatex
+% arara: clean: { extensions: [ aux, blg, idx, ilg, ind, log, out, pytxcode, rel, toc ] }
+% !arara: clean: { files: [ ans.tex, hint.tex] }
+
 \documentclass[companion]{subfiles}
 
 \begin{document}
@@ -8,8 +12,7 @@
 In this section, we provide motivation for the use of the Poisson process as an arrival process of customers or jobs at a shop, service station, or machine to receive service. In the exercises we derive numerous properties of this exceedingly important distribution; in the rest of the book we will use these results time and again.
 
 
-\opt{solutionfiles}{
-\subsection*{Theory and Exercises}
+\opt{solutionfiles}{\subsection*{Theory and Exercises}
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 }
@@ -169,7 +172,7 @@ Thus,
 \P{N(t+h) = n+1 \given N(t) = n} = \lambda h + o(h)
  \end{equation*}
 when $N(t) \sim P(\lambda t)$ and $h$ is small. 
-\begin{hint} Use ~\cref{ex:35}.
+\begin{hint} Use~\cref{ex:35}.
 \end{hint}
 \begin{solution}
  \begin{align*}
@@ -405,10 +408,10 @@ Take expectations left and right, use~\cref{eq:74}, and independence of $N_\lamb
 \begin{solution}
 \begin{align*}\label{eq:002}
 \P{N_\lambda(t) + N_\mu(t) = n} 
-&= \sum_{i=0}^n \P{ N_\mu(t) = n-i}\P{N_\lambda(t)=i} \\
+&= \sum_{i=0}^n \P{N_\mu(t) = n-i}\P{N_\lambda(t)=i} \\
 &= \sum_{i=0}^n \frac{(\mu t)^{n-i}}{(n-i)!} \frac{(\lambda t)^i}{i!} e^{-(\mu+\lambda)t} \\
 &= e^{-(\mu+\lambda)t} \sum_{i=0}^n \frac{(\mu t)^{n-i}}{(n-i)!} \frac{(\lambda t)^i}{i!} \\
-&= e^{-(\mu+\lambda)t}\frac 1{n!} \sum_{i=0}^n {n \choose i }(\mu t)^{n-i}(\lambda t)^i \quad\text{ (binomial formula)} \\
+&= e^{-(\mu+\lambda)t}\frac 1{n!} \sum_{i=0}^n {n \choose i }(\mu t)^{n-i}(\lambda t)^i \quad\text{(binomial formula)} \\
 &= \frac{((\mu+\lambda)t)^n}{n!}e^{-(\mu+\lambda)t}.
  \end{align*}
 \end{solution}
@@ -455,9 +458,9 @@ Use the standard formula for conditional probability and that $N_\lambda(t) + N_
  With the above:
  \begin{align*}
 & \P{N_\lambda(h) = 1 | N_\lambda(h) + N_\mu(h) = 1} \\
-&= \frac{\P{N_\lambda(h) = 1, N_\lambda(h) + N_\mu(h) = 1} }{ \P{N_\lambda(h) + N_\mu(h) = 1}} \\ 
-&= \frac{\P{N_\lambda(h) = 1, N_\mu(h) = 0}}{ \P{N_{\lambda+\mu}(h) = 1}} \\ 
-&= \frac{\P{N_\lambda(h) = 1}\P{N_\mu(h) = 0}}{ \P{N_{\lambda+\mu}(h) = 1}} \\ 
+&= \frac{\P{N_\lambda(h) = 1, N_\lambda(h) + N_\mu(h) = 1}}{\P{N_\lambda(h) + N_\mu(h) = 1}} \\ 
+&= \frac{\P{N_\lambda(h) = 1, N_\mu(h) = 0}}{\P{N_{\lambda+\mu}(h) = 1}} \\ 
+&= \frac{\P{N_\lambda(h) = 1}\P{N_\mu(h) = 0}}{\P{N_{\lambda+\mu}(h) = 1}} \\ 
 &= \frac{\lambda h \exp(-\lambda h) \exp(-\mu h)}{((\lambda+\mu)h)\exp{(-(\lambda+\mu)h)}}\\
 &= \frac{\lambda h \exp{(-(\lambda + \mu)h)}}{((\lambda+\mu)h)\exp{(-(\lambda+\mu)h)}}\\
 &= \frac{\lambda}{\lambda+\mu}.
@@ -562,13 +565,13 @@ Suppose that $N=n$, then since the outcomes $Z_i$ of the coins are i.i.d.,
 \end{equation*}
 where we use~\cref{eq:73}. 
 
-With ~\cref{eq:77}, 
+With~\cref{eq:77}, 
 \begin{align*}
  \E{e^{s Y}}
 &= \E{\sum_{n=0}^\infty e^{s\sum_{i=1}^N Z_i} \1{N=n}} \\
 &= \E{\sum_{n=0}^\infty e^{s\sum_{i=1}^n Z_i} \1{N=n}} \\
 &= \sum_{n=0}^\infty \E{e^{s\sum_{i=1}^n Z_i} \1{N=n}} \\
-&= \sum_{n=0}^\infty \E{e^{s\sum_{i=1}^n Z_i}} \E{\1{N=n}}, \text{ by independence of $Z_i$ and $N$}, \\
+&= \sum_{n=0}^\infty \E{e^{s\sum_{i=1}^n Z_i}} \E{\1{N=n}},\quad\text{by independence of $Z_i$ and $N$}, \\
 &= \sum_{n=0}^\infty \left(1+p(e^s-1)\right)^n \P{N=n} \\
 &= \sum_{n=0}^\infty \left(1+p(e^s-1)\right)^n e^{-\lambda} \frac{\lambda^n}{n!}
 = e^{-\lambda} \sum_{n=0}^\infty \frac{\left(1+p(e^s-1)\right)^n \lambda^n}{n!}\\
@@ -605,8 +608,7 @@ Thus, the limit becomes equal to the moment-generating function of the Poisson d
 
 \end{exercise}
 
-\opt{solutionfiles}{
-\Closesolutionfile{hint}
+\opt{solutionfiles}{\Closesolutionfile{hint}
 \Closesolutionfile{ans}
 \subsection*{Hints}
 \input{hint}
@@ -615,7 +617,6 @@ Thus, the limit becomes equal to the moment-generating function of the Poisson d
 }
 
 \end{document}
-%\clearpage
 
 
 %%% Local Variables:

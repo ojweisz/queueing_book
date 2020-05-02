@@ -1,3 +1,8 @@
+% arara: pdflatex
+% arara: clean: { extensions: [ aux, blg, idx, ilg, ind, log, out, pytxcode, rel, toc ] }
+% !arara: clean: { files: [ ans.tex, hint.tex] }
+
+
 \documentclass[companion]{subfiles}
 
 \begin{document}
@@ -11,8 +16,7 @@ A particularly fruitful model for the distribution of the inter-arrival times is
 Besides explaining this relation, we derive many useful properties of the exponential distribution, in particular, that it is \emph{memoryless}.
 
 
-\opt{solutionfiles}{
-\subsection*{Theory and Exercises}
+\opt{solutionfiles}{\subsection*{Theory and Exercises}
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 }
@@ -25,8 +29,7 @@ We say that $X$ is an \recall{exponentially distributed} random variable with me
 and then we write $X\sim \Exp(\lambda)$.
 
 
-The Poisson process $N$ and exponentially distributed inter-arrival times are intimately related: A counting process $\{N(t)\}$ is a \emph{Poisson process} with rate $\lambda$ if and only if the inter-arrival times $\{X_i\}$ are i.i.d.
-with common random variable $X\sim \Exp(\lambda)$, in short, $X_i\sim \Exp(\lambda) \Leftrightarrow N(t) \sim P(\lambda t)$.
+The Poisson process $N$ and exponentially distributed inter-arrival times are intimately related: A counting process $\{N(t)\}$ is a \emph{Poisson process} with rate $\lambda$ if and only if the inter-arrival times $\{X_i\}$ are i.i.d.\ with common random variable $X\sim \Exp(\lambda)$, in short, $X_i\sim \Exp(\lambda) \Leftrightarrow N(t) \sim P(\lambda t)$.
 We next provide further relations between the Poisson distribution and the exponential distribution.
 
 
@@ -56,7 +59,7 @@ Suppose $\lambda=0$. Then $\P{X\leq t} = 1-e^{0} = 0$. In words, this would mean
  \begin{align*}
 \E{X} 
 &= \int_0^\infty t \lambda e^{-\lambda t} \d t, \quad\text{density is } \lambda e^{-\lambda t} \\
-&= \lambda^{-1} \int_0^\infty u e^{-u}\, \d u, \quad \text{ by change of variable $u=\lambda t$}, \\
+&= \lambda^{-1} \int_0^\infty u e^{-u}\, \d u, \quad \text{by change of variable $u=\lambda t$}, \\
 &= -\lambda^{-1}\left. u e^{- u}\right|_0^\infty + \lambda^{-1} \int_0^\infty e^{- u} \d u\\
 &= - \lambda^{-1} \left. e^{- u} \right|_0^\infty = \frac1\lambda.
  \end{align*}
@@ -74,7 +77,7 @@ Suppose $\lambda=0$. Then $\P{X\leq t} = 1-e^{0} = 0$. In words, this would mean
  \begin{align*}
 \E{X^2} 
 &= \int_0^\infty t^2 \lambda e^{-\lambda t} \d t \\
-&= \lambda^{-2} \int_0^\infty u^2 e^{-u}\, \d u, \quad \text{ by change of variable $u=\lambda t$}, \\
+&= \lambda^{-2} \int_0^\infty u^2 e^{-u}\, \d u, \quad \text{by change of variable $u=\lambda t$}, \\
 &= -\lambda^{-2}\left. t^2 e^{- t}\right|_0^\infty + 2\lambda^{-2}\int_0^\infty t e^{- t} \d t \\
 &= -2\lambda^{-2}\left. t e^{- t}\right|_0^\infty + 2\lambda^{-2} \int_0^\infty e^{- t} \d t\\
 &= - 2\lambda^{-2} \left. e^{- t} \right|_0^\infty \\
@@ -94,7 +97,7 @@ $\V X = \lambda^{-2}$.
  % \end{equation*}
 \end{hint}
 \begin{solution}
- By the previous problems, $\E{X^2}=2/\lambda^2$ and $\E X = 1/\lambda$. Hence the variance $\V X = \E{X^2} - (\E X)^2 = \frac{2}{\lambda^2} - (\frac{1}{\lambda})^2 = \lambda^{-2}.$
+ By the previous problems, $\E{X^2}=2/\lambda^2$ and $\E X = 1/\lambda$. Hence the variance $\V X = \E{X^2} - (\E X)^2 = \frac{2}{\lambda^2} - (\frac{1}{\lambda})^2 = \lambda^{-2}$.
 \end{solution}
 \end{extra}
 
@@ -180,7 +183,7 @@ must be that $N(t) = 0$. Hence, for the first inter-arrival time $X_1$:
 \end{exercise}
 
 \begin{extra}
- Assume that inter-arrival times $\{X_i\}$ are i.i.d. and $\sim\Exp(\lambda)$. Let
+ Assume that inter-arrival times $\{X_i\}$ are i.i.d.\ and $\sim\Exp(\lambda)$. Let
 the arrival time of the $i$th job be $A_i=\sum_{k=1}^i X_k$. Show that %We do not need the MGF here.
  \begin{equation*}
 \E{A_i} = \frac i\lambda.
@@ -199,8 +202,7 @@ The simplest way to obtain the answer is to use that the expectation is a linear
 
 \begin{exercise}\clabel{ex:54}
  Let $A_i$ be the arrival time of customer $i$ and set $A_0=0$.
- Assume that the inter-arrival times $\{X_i\}$ are i.i.d.
- with exponential distribution with mean $1/\lambda$ for some $\lambda>0$.
+ Assume that the inter-arrival times $\{X_i\}$ are i.i.d.\ with exponential distribution with mean $1/\lambda$ for some $\lambda>0$.
  Prove that $A_i$ has density
 \begin{equation*}
 f_{A_i}(t) = \lambda e^{-\lambda t} \frac{(\lambda t)^{i-1}}{(i-1)!}.
@@ -214,8 +216,7 @@ f_{A_i}(t) = \lambda e^{-\lambda t} \frac{(\lambda t)^{i-1}}{(i-1)!}.
 \begin{solution}
  One way to find the distribution of $A_i$ is by using the moment-generating function $M_{A_i}(t) = \E{e^{t A_i}}$ of $A_i$.
  Let $X_i$ be the inter-arrival time between customers $i$ and $i-1$, and $M_X(t)$ the associated moment-generating function.
- Using the i.i.d.
- property of the $\{X_i\}$,
+ Using the i.i.d.\ property of the $\{X_i\}$,
 \begin{align*}
  M_{A_i}(t) &= \E{e^{t A_i}} = \E{\exp\left(t\sum_{k=1}^{i} X_k\right)} \\
 & = \prod_{k=1}^{i} \E{e^{tX_k}} = 
@@ -232,8 +233,7 @@ $A_i \sim \Gamma(i,\lambda)$, i.e., $A_i$ is Gamma distributed.
  Use the density $f_{A_i}$ of~\cref{ex:54} to show that $\E{A_i}=i/\lambda$. 
 \begin{hint}
 Use the standard integral 
- $\int_0^\infty x^n e^{-\alpha x} \d x =
- \alpha^{-n-1}n!$. 
+ $\int_0^\infty x^n e^{-\alpha x} \d x = \alpha^{-n-1}n! $. 
  Another way would be to use that, once you have the moment-generating function of some random variable $X$,
  $\E X = \frac{\d}{\d t} M_X(t) |_{t=0}$. 
 \end{hint}
@@ -331,7 +331,7 @@ Use that $X$ and $S$ are independent to get
  \begin{equation*}
  \begin{split}
  \P{Z>x} 
-&= \P{\min\{X,S\}>x} = \P{X>x\text{ and } S>x} = \P{X>x}\P{S>x} \\
+&= \P{\min\{X,S\}>x} = \P{X>x~\text{and}~S>x} = \P{X>x}\P{S>x} \\
 &= e^{-\lambda x} e^{-\mu x} = e^{-(\lambda+\mu)x}.
  \end{split}
  \end{equation*}
@@ -377,8 +377,7 @@ With this,
 
 
 
-\opt{solutionfiles}{
-\Closesolutionfile{hint}
+\opt{solutionfiles}{\Closesolutionfile{hint}
 \Closesolutionfile{ans}
 \subsection*{Hints}
 \input{hint}

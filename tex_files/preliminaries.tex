@@ -1,3 +1,8 @@
+% arara: pdflatex
+% arara: clean: { extensions: [ aux, blg, idx, ilg, ind, log, out, pytxcode, rel, toc ] }
+% arara: clean: { files: [ ans.tex, hint.tex] }
+
+
 \documentclass[companion.tex]{subfiles}
 
 \begin{document}
@@ -11,8 +16,7 @@ Here is an overview of concepts you are supposed to have seen in earlier courses
 We will use these concepts over and over in the rest of the book.
 
 
-\opt{solutionfiles}{
-\subsection*{Theory and Exercises}
+\opt{solutionfiles}{\subsection*{Theory and Exercises}
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 }
@@ -25,8 +29,8 @@ We use the notation:
  f(x+) &= \lim_{y\downarrow x} f(y),\\
  \1{A} &=
  \begin{cases}
- 1, & \text{ if $A$ is true}, \\
- 0, & \text{ if $A$ is false}.
+ 1, & \text{if $A$ is true}, \\
+ 0, & \text{if $A$ is false}.
  \end{cases}.
 \end{align*}
 The last equation defines the \recall{indicator function}.
@@ -170,7 +174,7 @@ Check Fubini's theorem for more on this if you are interested.)
 
 \begin{exercise}\clabel{ex:66}
  Use indicator functions to prove that
-$\sum_{i=0}^\infty i G(i) = \E{X^2}/2 - \E{X}/2.$
+$\sum_{i=0}^\infty i G(i) = \E{X^2}/2 - \E{X}/2$.
 \begin{hint}
 $\sum_{i=0}^\infty i G(i) = \sum_{n=0}^\infty \P{X=n} \sum_{i=0}^\infty i \1{n\geq i+1}$,
 and reverse the summations.
@@ -250,21 +254,21 @@ $\int_0^\infty y G(y) \d y = \int_0^\infty y \int_0^\infty \1{y\leq x}f(x)\, \d 
 \end{exercise}
 
 
-You should know that for the \recall{moment-generating function} $M_X(s)$ of a random variable~$X$ and~$s\in \mathbb{R}$ sufficiently small is defined as: 
+You should know that the \recall{moment-generating function} $M_X(s)$ of a random variable~$X$ and~$s\in \mathbb{R}$ sufficiently small is defined as: 
 \begin{subequations}
 \begin{align}
- M_X(s) &= \E{e^{s X}}, \\
- M_X(s) & \text{ uniquely characterizes the distribution of $X$}, \label{eq:75}\\
+ M_X(s) &= \E{e^{s X}}. \label{eq:75}\\
+\intertext{Moreover,  $M_X(s)$  uniquely characterizes the distribution of $X$. From this definition it follows that:}
  \E{X} &= M_{X}'(0) = \left.\frac{\d M_{X}(s)}{d s}\right|_{s=0},\label{eq:69}\\
 \E{X^2} &= M_{X}''(0), \label{eq:64}\\
-M_{X+Y}(s) &= M_X(s)\cdot M_Y(s), \quad \text{ if $X$ and $Y$ are independent}. \label{eq:73}
+M_{X+Y}(s) &= M_X(s)\cdot M_Y(s), \quad \text{if $X$ and $Y$ are independent}. \label{eq:73}
 \end{align}
 \end{subequations}
 
 \begin{extra}
- What is the value of $M_X(0)?$
+ What is the value of $M_X(0)$?
 \begin{solution}
- $M_X(0) = \E{e^{0 X}} = \E{e^0} = \E{1} = 1.$
+ $M_X(0) = \E{e^{0 X}} = \E{e^0} = \E{1} = 1$.
 \end{solution}
 \end{extra}
 
@@ -291,7 +295,7 @@ To help you recall the concept of \recall{conditional probability} consider the 
  \begin{split}
 &\P{\text{Child 2 wins}} \\
 &= \P{\text{Child 2 guesses the right number and child 1 does not win}} \\
-&= \P{\text{Child 2 guesses the right number} \given \text{ child 1 does not win}}
+&= \P{\text{Child 2 guesses the right number} \given\, \text{child 1 does not win}}
 \cdot \P{\text{Child 1 does not win}} \\
 &= \P{\text{Child 2 makes the right guess in the set $\{1,2\}$}}\cdot \frac 23 \\
 &= \frac 1 2\cdot \frac 23 = \frac 1 3.
@@ -304,14 +308,13 @@ To help you recall the concept of \recall{conditional probability} consider the 
 You should know that:
 \begin{subequations}
 \begin{align}
-\P{A\given B} & = \frac{\P{AB}}{\P{B}}, \quad\text{ if } \P{B}>0, \\
- \P{A} &= \sum_{i=1}^n \P{A B_i} = \sum_{i=1}^n \P{A\given B_i} \P{B_i}, \quad\text{ if $A=\bigcup_{i=1}^n B_i$ and $\P{B_i>0}$ for all $i$}. \label{eq:70}
+\P{A\given B} & = \frac{\P{AB}}{\P{B}}, \quad\text{if}\, \P{B}>0, \\
+ \P{A} &= \sum_{i=1}^n \P{A B_i} = \sum_{i=1}^n \P{A\given B_i} \P{B_i}, \quad\text{if $A=\bigcup_{i=1}^n B_i$ and $\P{B_i>0}$ for all $i$}. \label{eq:70}
 \end{align}
 \end{subequations}
 
 
-\opt{solutionfiles}{
-\Closesolutionfile{hint}
+\opt{solutionfiles}{\Closesolutionfile{hint}
 \Closesolutionfile{ans}
 \subsection*{Hints}
 \input{hint}

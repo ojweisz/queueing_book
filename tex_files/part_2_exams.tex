@@ -1,7 +1,20 @@
+\documentclass[companion]{subfiles}
+
+\begin{document}
+
 \section{Old exam Questions}
 
-\Opensolutionfile{ans}
+
+
+\opt{solutionfiles}{
 \subsection{Multiple-choice Questions}
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+}
+
+
+
+
 
 \begin{exercise}[201703]
 Let $L(s)$ be the number of items in the system at time $s$. 
@@ -1950,14 +1963,20 @@ Show that this reduces to $\E L = \rho/(1-\rho)$ for the $M/M/1$ queue.
 
 
 
-
+\opt{solutionfiles}{
+\Closesolutionfile{hint}
 \Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
 \subsection*{Solutions}
 \input{ans}
+}
 
+\end{document}
+%\clearpage
 
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../companion"
+%%% TeX-master: t
 %%% End:

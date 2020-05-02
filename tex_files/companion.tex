@@ -1,3 +1,14 @@
+% arara: pdflatex
+% arara: bibtex
+% arara: makeindex
+% arara: pythontex: {verbose: yes, rerun: modified }
+% arara: pdflatex
+% arara: pdflatex
+% je moet de aux file niet weggooien, want queueing_book heeft die nodig.
+% arara: clean: { extensions: [blg, idx, ilg, ind, log, out, pytxcode, rel, toc ]}
+% arara: clean: {files: [ ans.tex, hint.tex] }
+
+
 \documentclass[11pt]{book}
 
 \title{Analysis of Queueing Systems with  Sample Paths and Simulation\\
@@ -8,6 +19,7 @@ Companion}
 \showextratrue
 \usepackage[solutionfiles]{optional}
 %\usepackage[nosolutionfiles]{optional}
+%\usepackage[check]{optional}
 
 %\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
 \usepackage{preamble}

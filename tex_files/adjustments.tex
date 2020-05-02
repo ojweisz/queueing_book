@@ -1,3 +1,10 @@
+% arara: pdflatex
+% arara: clean: { extensions: [ aux, blg, idx, ilg, ind, log, out, pytxcode, rel, toc ] }
+
+\documentclass[companion]{subfiles}
+
+\begin{document}
+
 \section{Non-preemptive Interruptions, Server Adjustments}
 \label{sec:non-preempt-interr}
 
@@ -10,8 +17,7 @@ In this section we develop a simple model to understand the impact of such outag
 With this model, we can analyze the effects of reducing adjustment times or the variability of these adjustments times.
 For instance, we might decide to do fewer adjustments, but the average outage times become longer.
 
-\opt{solutionfiles}{
-\subsection*{Theory and Exercises}
+\opt{solutionfiles}{\subsection*{Theory and Exercises}
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 }
@@ -146,8 +152,7 @@ EW
   Hence, we have another set of tools to compare different scenarios to organize production systems.
 \end{remark}
 
-\opt{solutionfiles}{
-\Closesolutionfile{hint}
+\opt{solutionfiles}{\Closesolutionfile{hint}
 \Closesolutionfile{ans}
 \subsection*{Hints}
 \input{hint}
@@ -155,9 +160,11 @@ EW
 \input{ans}
 }
 
-%\clearpage
+
+\end{document}
+
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../companion"
+%%% TeX-master: t
 %%% End:
