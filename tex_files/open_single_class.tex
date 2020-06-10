@@ -74,10 +74,12 @@ Observe that $\rho$ is the fraction of time the server is busy. Then, from PASTA
 \begin{extra}\clabel{ex:17}
  If job $n-1$, say, leaves behind an empty system, show that the expected time until the next departure is $\E{D_n - D_{n-1}} = 1/\lambda + 1/\mu$. 
 \begin{hint}
- After job $n-1$ left, job $n$ has to arrive, so we need to wait first for this inter-arrival time. Then job $n$ must be served. This adds up to $1/\lambda + 1/\mu$. 
+ You might find some inspiration in~\cref{ex:l-227}. 
 \end{hint}
 \begin{solution}
-With the hint, we first have to wait for an inter-arrival
+ After job $n-1$ left, job $n$ has to arrive, so we need to wait first for this inter-arrival time. Then job $n$ must be served. This adds up to $1/\lambda + 1/\mu$. 
+
+In more detail, we first have to wait for an inter-arrival
  time $X_n$. Then, since job $n$'s service starts right away, it
  leaves when $D_n = D_{n-1}+X_n + S_n$. Now observe that, due to the memoryless property of the inter-arrival times, $\E{X_n} = \E{A_n - D_{n-1}} = 1/\lambda$. Thus, the expected duration is $\E{X_n + S_n}=1/\lambda + 1/\mu$. 
 \end{solution}
