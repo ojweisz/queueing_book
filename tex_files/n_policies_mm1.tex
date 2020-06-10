@@ -1,3 +1,10 @@
+% arara: pdflatex
+% arara: clean: { extensions: [ aux, blg, idx, ilg, ind, log, out, pytxcode, rel, toc ] }
+% !arara: clean: { files: [ ans.tex, hint.tex] }
+
+\documentclass[companion]{subfiles}
+
+\begin{document}
 
 \section{N-policies for the $M/M/1$ queue}
 \label{sec:n-policies}
@@ -9,8 +16,8 @@ In particular, we analyze the influence of the $N$-policy on the long-run averag
 For this we make a cost model in several steps and at the end we discuss how to minimize the cost as a function of the threshold~$N$.
 In passing, we obtain a third way to compute the time-average number $\E L$ of jobs in the system; the first resulted from the analysis of the $M/M/1$ queue in~\cref{sec:mm1}, the second from Little's law, cf.~\cref{ex:l-215}
 
-\opt{solutionfiles}{
-\subsection*{Theory and Exercises}
+\opt{solutionfiles}
+{\subsection*{Theory and Exercises}
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 }
@@ -32,21 +39,24 @@ The reader should note that this type of recursion is a difference equation.
 Moreover, the ideas behind its derivation are very similar to the ideas used in dynamic programming.
 
 \begin{exercise}\clabel{ex:aab}
-Provide an intuitive explanation for this formula, and show that $T(q)=q/(\mu-\lambda)$ solves~\cref{eq:92}. 
+Provide an intuitive explanation for~\cref{eq:92} (where is the memoryless property used?), and show that $T(q)=q/(\mu-\lambda)$ solves~\cref{eq:92}.  
 \begin{hint}
-We just guess the form $T(q) = aq + b$, i.e., linear in $q$. It is clear that $T(0)=0$: if the system is empty, the time to clear it is zero. Thus, $b=0$, and it remains to solve for $a$. 
+We just guess the form $T(q) = aq + b$, i.e., linear in $q$. It is clear that $T(0)=0$: if the system is empty, the time to clear is zero. Thus, $b=0$, and it remains to solve for $a$. 
 \end{hint}
 
 \begin{solution}
   Jobs come in at rate $\lambda$ and are served at rate $\mu$.
   Therefore the systems drains at rate $\mu-\lambda$.
-  When there are $q$ jobs in the system, it must take $q/(\mu-\lambda)$ units of time to serve these jobs.
+  When there are $q$ jobs in the system, it must take $q/(\mu-\lambda)$ units of time to serve these jobs. 
 
-  We substitute the guess $T(q) = aq$ in ~\cref{eq:92}, and solve for $a$. Specifically,
+  We substitute the guess $T(q) = aq$ in~\cref{eq:92}, and solve for $a$. Specifically,
   \begin{equation*}
     a q = \alpha (aq + a) + \beta (a q - a) + 1/(\lambda+\mu). 
   \end{equation*}
-Noticing that $\alpha + \beta = 1$, this reduces to $0 = a(\alpha - \beta) + 1/(\lambda + \mu)$. The rest is trivial.
+  Noticing that $\alpha + \beta = 1$, this reduces to $0 = a(\alpha - \beta) + 1/(\lambda + \mu)$. The rest is trivial.
+
+  The reasoning behind~\cref{eq:92} is crucially dependent on the memoryless property.
+  Independent of when we `look at the system', the expected time to the next arrival is $1/\lambda$ and to the next departure it is $1/\mu$, and the expected time to either of these events is $1/(\lambda+\mu)$.
 \end{solution}
 \end{exercise}
 
@@ -59,10 +69,10 @@ Noting that the queueing cost is $hq$ per unit time when there are $q$ jobs in t
 %because $1/(\lambda + \mu)$ is the expected time we have to wait until either an arrival or a departure occurs.
 
 
-To solve this, observe that in~\cref{eq:92} the last term is a constant, and that $T(q)$ is a linear function in~$q$.
-In the recursion for $V(q)$ we see that the last term is linear in $q$ which leads us to the guess $a q^2 + b q + c$ for $V(q)$.
-Thus, we substitute this into the above expression and then try to solve for $a,b$ and $c$.\footnote{The reader might wonder about the uniqueness of the solution.
-  Noting that $V(q+1)$ follows directly from $V(q)$ and $V(q-1)$, there can be just one solution.}
+To solve this, observe first that in~\cref{eq:92}, which we use to compute $T(q)$, the last term is a constant, and that $T(q)$ is a linear function in~$q$.
+In the recursion for $V(q)$ we see that the last term is linear in $q$.
+So let us guess that $V(q)$ is quadratic in~$q$, i.e., $V(q)=a q^2 + b q + c$ Thus, we substitute this into the above expression and then try to solve for $a,b$ and $c$.\footnote{The reader might wonder about the uniqueness of the solution.
+  Noting that $V(q+1)$ follows directly from $V(q)$ and $V(q-1)$, there can be just one solution when the boundary conditions are given.}
 As $V(0)=0$, it follows already that $c=0$.
 Thus, it remains to find $a$ and $b$.
 
@@ -116,7 +126,7 @@ Use the renewal-reward theorem to explain the  relation
 \begin{equation*}
   \frac{V(1)}{C(1)} = \frac{V(1)}{1/\lambda + T(1)} = h \E L,
 \end{equation*}
-where $\E L$ is given by~\cref{eq:el}. Then use the above expressions for $V(1)$ and $C(1)$ to verify this.
+where $\E L$ is the expected number of jobs in an $M/M/1$ queue and given by~\cref{eq:el}. Then use the above expressions for $V(1)$ and $C(1)$ to verify this.
 
 With this result, we have found yet another way to compute the expected number of jobs in the system.  
 \begin{hint}
@@ -176,9 +186,8 @@ Observe that $V(N)$ and $W(N)$ are quadratic in $N$, while $C(N)$ is linear in $
 Hence, the average cost is a convex function of $N$, and locating the minimizer of a one-dimensional convex function is simple.
 
 
-
-\opt{solutionfiles}{
-\Closesolutionfile{hint}
+\opt{solutionfiles}
+{\Closesolutionfile{hint}
 \Closesolutionfile{ans}
 \subsection*{Hints}
 \input{hint}
@@ -186,10 +195,10 @@ Hence, the average cost is a convex function of $N$, and locating the minimizer 
 \input{ans}
 }
 
-%\clearpage 
+\end{document}
 
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../companion"
+%%% TeX-master: t
 %%% End:

@@ -1,3 +1,11 @@
+% arara: pdflatex
+% arara: clean: { extensions: [ aux, blg, idx, ilg, ind, log, out, pytxcode, rel, toc ] }
+% !arara: clean: { files: [ ans.tex, hint.tex] }
+
+\documentclass[companion]{subfiles}
+
+\begin{document}
+
 \section{Open Single-Class Product-Form Networks}
 \label{sec:jackson-networks}
 
@@ -118,7 +126,7 @@ Conditioning is much faster, but requires the concept of conditional density. Yo
 \end{extra}
 
 
-\begin{extra}
+\begin{extra}\clabel{ex:open-1}
 Show that when the queue is not empty at a departure time, the density of the next inter-departure time is $f_D(t) = \mu e^{-\mu t}$.
 \begin{solution}
 After the departure, the server can start right away with the job at the head of the queue. The inter-departure time of this job is $\Exp(\mu)$.
@@ -374,3 +382,11 @@ See the exercises above.
 }
 %\clearpage
 
+
+\end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

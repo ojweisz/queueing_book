@@ -1,10 +1,16 @@
+% arara: pdflatex
+% arara: clean: { extensions: [ aux, blg, idx, ilg, ind, log, out, pytxcode, rel, toc ] }
+% !arara: clean: { files: [ ans.tex, hint.tex] }
+
+\documentclass[companion]{subfiles}
+
+\begin{document}
 %\section{Construction of Discrete-Time Queueing Processes}
 \section{Queueing Processes in Discrete-Time}
 \label{sec:constr-discr-time}
 
 
-\opt{solutionfiles}{
-\Opensolutionfile{hint}
+\opt{solutionfiles}{\Opensolutionfile{hint}
 \Opensolutionfile{ans}
 }
 
@@ -227,7 +233,7 @@ It is apparent that Suggestions 1 and 2 above do not significantly affect the be
  \centering
 % progs/intake_control.py
 \input{../progs/balanced} 
-\caption{ Effect of capacity and holiday plans.
+\caption{Effect of capacity and holiday plans.
  We plot for each time point the maximum and the minimum queue length for each of the policies.
  Apparently, the effect of each of these policies is, for all practical purposes, negligible.
 }
@@ -455,7 +461,7 @@ print(L)
  over the new jobs. Assume queue $A$ contains the faulty items, and
  queue $B$ the new jobs. Then the recursions become:
 \begin{align*}
- d_{A,k} &= \min\{L_{A,k-1}, 2c_k\}, (\text{ as faulty jobs require half of the processing time})\\
+ d_{A,k} &= \min\{L_{A,k-1}, 2c_k\}, \quad(\text{as faulty jobs require half of the processing time})\\
  c_{B,k} &= c_k - d_{A,k}/2, \\
  d_{B,k} &= \min\{L_{B,k-1}, c_{B,k}\}, \\
  a_{A,k} &= p d_{B,k-1}, \\
@@ -538,9 +544,9 @@ A machine can switch on and off.
  \begin{equation*}
  I_{k+1} =
  \begin{cases}
- 1 & \text{ if } L_{k} \geq N,\\
- I_k & \text{ if } 0< L_{k} <N,\\
- 0 & \text{ if } L_{k} =0,\\
+ 1 & \text{if} L_{k} \geq N,\\
+ I_k & \text{if} 0< L_{k} <N,\\
+ 0 & \text{if} L_{k} =0,\\
  \end{cases}
  \end{equation*}
 and assume that $I_0 =0$ at the start, i.e., the machine is off. Thus, we can write:
@@ -617,7 +623,7 @@ and likewise for the other queue.
  \end{split}
 \end{equation*}
 
-As an aside, another interesting rule to distribute the capacity $c_k$ over the queues could be based on the principle of \textit{ equal division of the contested sum}.
+As an aside, another interesting rule to distribute the capacity $c_k$ over the queues could be based on the principle of \textit{equal division of the contested sum}.
 This principle is based on game-theoretic ideas.
 Aumann and Maschler applied this principle to clarify certain division rules discussed in the Talmud to divide the legacy among a number of inheritors, each having a different claim size.
 \end{solution}
@@ -731,7 +737,7 @@ d_{k}^A$. Thus,
  \begin{split}
  d^A_k &= \min\{L_{k-1}^A, c_k^A, M-L^B_{k-1}\}, \\
  L_k^A &= L_{k-1}^A -d_k^A + a_k, \\
- a_k^B &= d_{k}^A, \text{ (ensures all jobs first pass station A and then station B)}\\
+ a_k^B &= d_{k}^A, \quad \text{ensures all jobs first pass station A and then station B}\\
  d^B_k &= \min\{L_{k-1}^B, c_k^B\}, \\
  L_k^B &= L_{k-1}^B -d_k^B + a_k^B.
  \end{split}
@@ -887,8 +893,7 @@ we can specify the evolution of the queue length processes. So it remains to dea
 \end{extra}
 
 
-\opt{solutionfiles}{
-\Closesolutionfile{hint}
+\opt{solutionfiles}{\Closesolutionfile{hint}
 \Closesolutionfile{ans}
 \subsection*{Hints}
 \input{hint}
@@ -896,10 +901,9 @@ we can specify the evolution of the queue length processes. So it remains to dea
 \input{ans}
 }
 
-
-%\clearpage
+\end{document}
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../companion"
+%%% TeX-master: t
 %%% End:

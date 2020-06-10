@@ -1,3 +1,11 @@
+% arara: pdflatex
+% arara: clean: { extensions: [ aux, blg, idx, ilg, ind, log, out, pytxcode, rel, toc ] }
+% !arara: clean: { files: [ ans.tex, hint.tex] }
+
+\documentclass[companion]{subfiles}
+
+\begin{document}
+
 \section{N-policies for the $M/G/1$ queue}
 \label{sec:n-policies-mg1}
 
@@ -5,8 +13,8 @@ Interestingly, we can extend the analysis of~\cref{sec:distr-queue-length} and~\
 Thus, rather than exponentially distributed service times, we now consider general service times.
 For the rest, the model and the problem is the same as in~\cref{sec:n-policies}. 
 
-\opt{solutionfiles}{
-\subsection*{Theory and Exercises}
+\opt{solutionfiles}
+{\subsection*{Theory and Exercises}
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 }
@@ -38,6 +46,7 @@ The terms linear in $q$ cancel. And thus, $0=a\E Y - a + \E S$. The result follo
 \end{solution}
 \end{exercise}
 
+
 Let $V(q)$ be the cost to clear the system right after a departure that leaves $q$ jobs behind.
 Thus, $V(0)=0$.
 Again, analogous~\cref{sec:distr-queue-length} and the derivation above for $T(q)$, we see that $V(q)$ must satisfy the relation
@@ -51,7 +60,7 @@ The queueing cost $H(q)$ consists of two components.
 The first is the cost to keep $q$ jobs in the system while there is a job in service.
 Clearly, the expected cost of this is $h q \E S$.
 The second component is the cost of new jobs that arrive during the service.
-While this is slightly harder to determine, we can combine the ideas underlying the derivation in~\cref{eq:99} the results of \cref{ex:35} to \cref{ex:p-35}.
+While this is slightly harder to determine, we can combine the ideas underlying the derivation in~\cref{eq:99} and \cref{ex:p-35}  and \cref{ex:3}.
 Specifically, assume it is given that the service time is~$s$.
 Then the expected total queueing cost $U(s)$ of the new arrivals must satisfy for some $0<\delta\ll 1$
 \begin{equation*}
@@ -226,8 +235,23 @@ Derive~\cref{eq:100}.
 \end{exercise}
 
 
-\opt{solutionfiles}{
-\Closesolutionfile{hint}
+\begin{extra}
+  Why does the load $\rho$ not depend on $N$?
+\begin{solution}
+  The total number $A(t)$ of job that arrive during $[0,t]$ does not depend on $N$.
+  Since the system does not explode, we must have that $\delta = \lambda$, hence the number of jobs served per unit time is, on the long run, what arrives.
+  And thus, by~\cref{eq:86}, $\rho$ does not depend on $N$.
+  But, why is this system rate-stable?
+  Here we provide an intuitive explanation.
+  When we switch on the server, the queue `drains' on average at rate $\mu-\lambda$.
+  Consequently, no matter how large $N$, the expected time of empty the system is finite.
+  And, whenever the system is empty, the stochastic process restarts.
+  As such cycles start over and over again, the queue length can never `escape to infinity'.
+\end{solution}
+\end{extra}
+
+\opt{solutionfiles}
+{\Closesolutionfile{hint}
 \Closesolutionfile{ans}
 \subsection*{Hints}
 \input{hint}
@@ -235,10 +259,11 @@ Derive~\cref{eq:100}.
 \input{ans}
 }
 
-%\clearpage 
+
+\end{document}
 
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../companion"
+%%% TeX-master: t
 %%% End:

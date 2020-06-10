@@ -60,7 +60,7 @@ Before introducing these definitions, however, we need to introduce some notatio
 We provide in~\cref{sec:graphical-summaries_1} an overview of the relations we introduce in this chapter.
 
 
-\subfile{kendall.tex}
+\subfile{kendall.tex} 
 \subfile{random_walk.tex}
 \subfile{ratestability.tex}
 \subfile{empiricalperfmeasures.tex}
@@ -154,15 +154,16 @@ Then we wait until $N$ or more jobs have arrived, and then we switch on the serv
 The server processes jobs until the system is empty again, switches off, and remains idle until a sufficient number of new jobs have arrived,  and so on.
 Thus, we use an $N$-policy to \emph{control} the queueing system, in particular the server, and the task is to find a switching threshold~$N$ that minimizes the long-run average cost.
 
-Observe that under such policies the server occupancy can also increase.
+Observe that under such policies the server also has longer busy and idle times.
 In fact, this sometimes seems to the policy at dentists or hospitals: do something else until the waiting room is quite full, and then start serving patients.
-Like this the server minimizes idle time, and, in the example of a GP, the server (GP) does not have to wait for patients that might be late.
+Like this, in the example of a GP, the server (GP) does not have to wait for short times for patients that might be late, but instead can collect idle times into one long stretch, and do something useful instead.
 
 In this chapter we first study the $M/M/1$ queue and $M/G/1$ under a $N$-policy.
 As a second topic we study open networks of stations of $M/M/c$ stations and jobs arrive as a Poisson process.
 As we will see, the analysis of the $N$-policy requires to solve an equation of the type $v = c + P v$, where $v$ and $c$ are vectors and $P$ a (stochastic) matrix, while for the network we need to solve an equation of the type $\lambda = \gamma + \lambda P$, where $\lambda$ and $\gamma$ are vectors and $P$ is again a (stochastic) matrix.
 As these equations are (nearly) the same, we therefore concentrate in~\cref{sec:lambda-=-gamma} on the solution.
-The analysis in this chapter allows us to illustrate many tools and results of the previous chapters. In a sense, everything comes together here. 
+The analysis in this chapter allows us to illustrate many tools and results of the previous chapters such as the renewal-reward theorem.
+In a sense, everything comes together here.
 
 We finally point out that the techniques developed in this chapter extend (way) beyond just queueing theory; they are worth memorizing.
 The concepts we introduce here can for instance be generalized to (optimal) stopping problems, which find many applications beyond queueing, such in finance, inventory theory, decision theory, and so on.

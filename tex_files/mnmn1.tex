@@ -119,7 +119,7 @@ p(0)\frac{(c\rho)^c}{c!(1-\rho)}.
 \end{align*}
 Hence, 
 \begin{equation}\label{eq:501}
- G= \sum_{n=0}^{c-1}\frac{(c\rho)^n}{n!} + \frac{(c\rho)^c}{c!(1-\rho)}.
+p(0)^{-1} =  G= \sum_{n=0}^{c-1}\frac{(c\rho)^n}{n!} + \frac{(c\rho)^c}{c!(1-\rho)}.
 \end{equation}
 
 Next, 
@@ -225,11 +225,11 @@ c = 3
 rho = labda / mu / c
 rho
 
-G = sum((c * rho)**n / factorial(n) for n in range(c))
-G += (c * rho)**c / ((1 - rho) * factorial(c))
+G = sum((c * rho) ** n / factorial(n) for n in range(c))
+G += (c * rho) ** c / ((1 - rho) * factorial(c))
 G
 
-ELQ = (c * rho)**c / (factorial(c) * G) * rho / (1 - rho)**2
+ELQ = (c * rho) ** c / (factorial(c) * G) * rho / (1 - rho) ** 2
 ELQ
 ELS = rho * c
 ELS
@@ -242,19 +242,19 @@ Now for the $M/M/1$ queue:
 \begin{pyconsole}
 labda = 5
 c = 3
-mu = 2*c
+mu = 2 * c
 
-rho = labda / mu 
+rho = labda / mu
 rho
 
-ELQ = rho**2/(1-rho)
+ELQ = rho ** 2 / (1 - rho)
 ELQ
 ELS = rho
 ELS
 EL = ELS + ELQ
 EL
 
-rho/(1-rho) # this must also be EL, just a check
+rho / (1 - rho)  # this must also be EL, just a check
 \end{pyconsole}
 
 Note the last check. As a rule, you should always compare your results
@@ -594,7 +594,7 @@ After observing a single-server queue for several days, the following steady-sta
 
 \begin{pyconsole}
 P = [0.4, 0.3, 0.2, 0.05, 0.05]
-EL = sum(n*P[n] for n in range(len(P)))
+EL = sum(n * P[n] for n in range(len(P)))
 EL
 \end{pyconsole}
 
@@ -605,49 +605,50 @@ negative. Thus, $\E{L_Q} = \sum_n \max\{n-m, 0\} p(n)$.
 
 \begin{pyconsole}
 m = 1
-ELq = sum(max(n-m,0)*P[n] for n in range(len(P)))
+ELq = sum(max(n - m, 0) * P[n] for n in range(len(P)))
 ELq
 \end{pyconsole}
 
 
 \begin{pyconsole}
-labda = 10./60
-Wq = ELq/labda # in minutes
+labda = 10.0 / 60
+Wq = ELq / labda  # in minutes
 Wq
-Wq/60 # in hours
+Wq / 60  # in hours
 
-W = EL/labda # in minutes
+W = EL / labda  # in minutes
 W
-W/60 # in hours
+W / 60  # in hours
 \end{pyconsole}
 
 Let's use the standard definition of the variance, i.e., $\V X = \sum_{i} (x_i-\E X)^2 \P{X=x_i}$, for once.
 
 \begin{pyconsole}
 from math import sqrt
-var_L = sum((n-EL)**2*P[n] for n in range(len(P)))
+
+var_L = sum((n - EL) ** 2 * P[n] for n in range(len(P)))
 var_L
 sqrt(var_L)
 \end{pyconsole}
 
 
 \begin{pyconsole}
-var_Lq = sum((max(n-m,0)-ELq)**2*P[n] for n in range(len(P)))
+var_Lq = sum((max(n - m, 0) - ELq) ** 2 * P[n] for n in range(len(P)))
 var_Lq
 sqrt(var_Lq)
 \end{pyconsole}
 
 
 \begin{pyconsole}
-mu = 1./(W-Wq)
-1./mu # in minutes
+mu = 1.0 / (W - Wq)
+1.0 / mu  # in minutes
 
-rho = labda/mu
+rho = labda / mu
 rho
 \end{pyconsole}
 
 \begin{pyconsole}
-rho = EL-ELq
+rho = EL - ELq
 rho
 \end{pyconsole}
 This checks with the previous line.
@@ -670,7 +671,7 @@ number of idle servers is $0$.
 
 
 \begin{pyconsole}
-idle = sum( max(m-n,0)*P[n] for n in range(len(P)))
+idle = sum(max(m - n, 0) * P[n] for n in range(len(P)))
 idle
 \end{pyconsole}
 
@@ -735,9 +736,9 @@ This is a queueing system with loss, in particular the $M/M/1/1+2$ queue.
 First compute $\E{L_Q}$ for the case with a buffer for $2$ customers.
 
 \begin{pyconsole}
-labda = 6.
-mu = 5.
-rho = labda/mu
+labda = 6.0
+mu = 5.0
+rho = labda / mu
 c = 1
 b = 2
 \end{pyconsole} 
@@ -752,23 +753,24 @@ There are 4 states in total: $0,1,2,3$. (The reason to import \pyv{numpy} here a
 
 \begin{pyconsole}
 import numpy as np
+
 np.set_printoptions(precision=3)
 
-P = np.array([rho**n for n in range(c+b+1)])
+P = np.array([rho ** n for n in range(c + b + 1)])
 P
 
 G = sum(P)
 G
 
-P /= G # normalize
+P /= G  # normalize
 P
 \end{pyconsole} 
 
 \begin{pyconsole}
-L = sum(n*P[n] for n in range(len(P)))
+L = sum(n * P[n] for n in range(len(P)))
 L
 
-Lq = sum((n-c)*P[n] for n in range(c,len(P)))
+Lq = sum((n - c) * P[n] for n in range(c, len(P)))
 Lq
 \end{pyconsole} 
 
@@ -778,10 +780,10 @@ accepted, i.e., not lost. The fraction of customers lost is equal to
 the fraction of customers that sees a full system.
 
 \begin{pyconsole}
-lost = labda*P[-1] # the last element of P
+lost = labda * P[-1]  # the last element of P
 lost
 
-accepted = labda*(1.-P[-1]) # rate at which jobs are accepted
+accepted = labda * (1.0 - P[-1])  # rate at which jobs are accepted
 accepted
 \end{pyconsole} 
 
@@ -789,18 +791,18 @@ Now increase the buffer $b$ to 5.
 
 \begin{pyconsole}
 b = 5
-P = np.array([rho**n for n in range(c+b+1)])
+P = np.array([rho ** n for n in range(c + b + 1)])
 P
 G = sum(P)
 G
 
-P /= G # normalize
+P /= G  # normalize
 P
 
-L = sum(n*P[n] for n in range(len(P)))
+L = sum(n * P[n] for n in range(len(P)))
 L
 
-accepted = labda*(1.-P[-1])
+accepted = labda * (1.0 - P[-1])
 accepted
 \end{pyconsole} 
 \end{solution}
@@ -821,48 +823,49 @@ accepted
 P = [0.4, 0.3, 0.2, 0.05, 0.05]
 
 c = 2
-Lq = sum((n-c)*P[n] for n in range(c,len(P)))
+Lq = sum((n - c) * P[n] for n in range(c, len(P)))
 Lq
 
-L= sum(n*P[n] for n in range(len(P)))
+L = sum(n * P[n] for n in range(len(P)))
 L
 \end{pyconsole}
 
  Using Little's formula, determine $\E W$ and $\E{W_Q}$. 
 \begin{pyconsole}
-labda = 10./60
-Wq = Lq/labda # in minutes
+labda = 10.0 / 60
+Wq = Lq / labda  # in minutes
 Wq
-Wq/60 # in hours
+Wq / 60  # in hours
 
-W = L/labda
+W = L / labda
 W
 \end{pyconsole} 
 
  Determine $\V L$ and $\V{L_Q}$.
 \begin{pyconsole}
 from math import sqrt
-var_L = sum((n-L)**2*P[n] for n in range(len(P)))
+
+var_L = sum((n - L) ** 2 * P[n] for n in range(len(P)))
 var_L
 sqrt(var_L)
 \end{pyconsole}
 
 \begin{pyconsole}
-var_Lq = sum((max(n-c,0)-Lq)**2*P[n] for n in range(len(P)))
+var_Lq = sum((max(n - c, 0) - Lq) ** 2 * P[n] for n in range(len(P)))
 var_Lq
 \end{pyconsole}
 
 Determine the service time and the utilization.
 \begin{pyconsole}
-mu = 1./(W-Wq)
-1./mu # in minutes
+mu = 1.0 / (W - Wq)
+1.0 / mu  # in minutes
 
-rho = labda/mu
+rho = labda / mu
 rho
 \end{pyconsole}
 
 \begin{pyconsole}
-rho = L-Lq
+rho = L - Lq
 rho
 \end{pyconsole}
 This checks the previous line.
@@ -889,12 +892,13 @@ First the service rates.
 \begin{pyconsole}
 import numpy as np
 from math import factorial
-labda = [10., 15., 15., 10., 5.]
+
+labda = [10.0, 15.0, 15.0, 10.0, 5.0]
 c = 2
-mn = 2*np.ones(len(labda)+1, dtype=int) # number of active servers
-mn[0] = 0 # no service if system is empty
-mn[1] = 1 # one busy server if just one job present
-mu = 5*mn # service rate is 5 times no of active servers
+mn = 2 * np.ones(len(labda) + 1, dtype=int)  # number of active servers
+mn[0] = 0  # no service if system is empty
+mn[1] = 1  # one busy server if just one job present
+mu = 5 * mn  # service rate is 5 times no of active servers
 mu
 \end{pyconsole}
 
@@ -903,25 +907,25 @@ Since there can be arrivals in states $0,\ldots, 4$, the system can contain $0$ 
 Use the level-crossing result for the $M(n)/M(n)/1$ queue:
 
 \begin{pyconsole}
-P = [1]*(len(labda)+1)
-for i in range(1,len(P)):
- P[i] = labda[i-1]/mu[i]*P[i-1]
+P = [1] * (len(labda) + 1)
+for i in range(1, len(P)):
+    P[i] = labda[i - 1] / mu[i] * P[i - 1]
 
-P = np.array(P) # unnormalized probabilities
+P = np.array(P)  # unnormalized probabilities
 P
 \end{pyconsole}
 
 \begin{pyconsole}
-G = sum(P) # normalization constant
+G = sum(P)  # normalization constant
 G
-P /= G # normalize
-P 
+P /= G  # normalize
+P
 \end{pyconsole} 
 
 $\lambda = \sum_{n}\lambda(n) p(n)$.
 
 \begin{pyconsole}
-labdaBar = sum(labda[n]*P[n] for n in range(len(labda)))
+labdaBar = sum(labda[n] * P[n] for n in range(len(labda)))
 labdaBar
 \end{pyconsole}
 
@@ -929,7 +933,7 @@ labdaBar
 The average number in the system is: 
 
 \begin{pyconsole}
-Ls = sum(n*P[n] for n in range(len(P)))
+Ls = sum(n * P[n] for n in range(len(P)))
 Ls
 \end{pyconsole}
 
@@ -937,18 +941,18 @@ Ls
 The average number in queue: 
 \begin{pyconsole}
 c = 2
-Lq = sum((n-c)*P[n] for n in range(c,len(P)))
+Lq = sum((n - c) * P[n] for n in range(c, len(P)))
 Lq
 \end{pyconsole} 
 
 And now the waiting times:
 
 \begin{pyconsole}
-Ws = Ls/labdaBar
-Ws # time in the system
+Ws = Ls / labdaBar
+Ws  # time in the system
 
-Wq = Lq/labdaBar
-Wq # time in queue
+Wq = Lq / labdaBar
+Wq  # time in queue
 \end{pyconsole} 
 
 \end{solution}
@@ -978,9 +982,9 @@ of servers must be high, whereas if servers are relatively expensive, customers 
 
  Would one server/person do? 
 \begin{pyconsole}
-labda = 28./60 # arrivals per minute
-ES = 4.
-labda*ES
+labda = 28.0 / 60  # arrivals per minute
+ES = 4.0
+labda * ES
 \end{pyconsole} 
 
 If $c=1$, the load $\rho=\lambda \E S/c >1$ is clearly undesirable for one server. We need at
@@ -995,15 +999,14 @@ I just convert the formulas of~\cref{ex:7} to Python code. This saves
 me time during the computations.
 
 \begin{pyconsole}
- 
 def WQ(c, labda, ES):
- from math import factorial
- rho = labda*ES/c
- G = sum([(c*rho)**n/factorial(n) for n in range(c)])
- G += (c*rho)**c/(1.-rho)/factorial(c)
- Lq = (c*rho)**c/(factorial(c)*G) * rho/(1.-rho)**2
- return Lq/labda # Wq, Little's law
+    from math import factorial
 
+    rho = labda * ES / c
+    G = sum([(c * rho) ** n / factorial(n) for n in range(c)])
+    G += (c * rho) ** c / (1.0 - rho) / factorial(c)
+    Lq = (c * rho) ** c / (factorial(c) * G) * rho / (1.0 - rho) ** 2
+    return Lq / labda  # Wq, Little's law
 \end{pyconsole} 
 
 Considering the scenario with one server is superfluous as $\rho>1$ in
@@ -1012,23 +1015,23 @@ that case.
 What is the waiting time for $c=2$ servers?
 
 \begin{pyconsole}
-WQ(2, 28./60, 4) # in minutes
-WQ(2, 28./60, 4)/60. # in hours
+WQ(2, 28.0 / 60, 4)  # in minutes
+WQ(2, 28.0 / 60, 4) / 60.0  # in hours
 \end{pyconsole}
 
 What is the waiting time for $c=3$ servers?
 
 \begin{pyconsole}
-WQ(3, 28./60, 4) # in minutes
-WQ(3, 28./60, 4)/60. # in hours
+WQ(3, 28.0 / 60, 4)  # in minutes
+WQ(3, 28.0 / 60, 4) / 60.0  # in hours
 \end{pyconsole}
 
 
 What is the waiting time for $c=4$ servers?
 
 \begin{pyconsole}
-WQ(4, 28./60, 4) # in minutes
-WQ(4, 28./60, 4)/60. # in hours
+WQ(4, 28.0 / 60, 4)  # in minutes
+WQ(4, 28.0 / 60, 4) / 60.0  # in hours
 \end{pyconsole} 
 
 In the next part of the question we will interpret these numbers.
@@ -1045,27 +1048,27 @@ the number of maintenance workers waiting (i.e., being idle because they are wai
 
 
 \begin{pyconsole}
-labda = 28./60
-ES = 4.
+labda = 28.0 / 60
+ES = 4.0
 c = 2
-ELQ = labda*WQ(c, labda, ES)
+ELQ = labda * WQ(c, labda, ES)
 ELQ
-c-labda*ES
+c - labda * ES
 \end{pyconsole} 
 Now the maintenance employees wait more than the tool crib employees.
 
 \begin{pyconsole}
 c = 3
-ELQ = labda*WQ(c, labda, ES)
+ELQ = labda * WQ(c, labda, ES)
 ELQ
-c-labda*ES
+c - labda * ES
 \end{pyconsole} 
 
 \begin{pyconsole}
 c = 4
-ELQ = labda*WQ(c, labda, ES)
+ELQ = labda * WQ(c, labda, ES)
 ELQ
-c-labda*ES
+c - labda * ES
 \end{pyconsole} 
 
 Clearly, $c=3$ should do.
@@ -1176,21 +1179,20 @@ Second, the expected number of cabs waiting must be
 and the expected number of parties waiting must be $\sum_{j=1}^\infty j p_{j,0}$.
 
 \begin{pyconsole}
-labda = 12. # per hour
-mu = 15. # per hour
-rho = labda/mu
+labda = 12.0  # per hour
+mu = 15.0  # per hour
+rho = labda / mu
 
-def p(i,j):
- q = 3 - j + i
- return rho**q*(1.-rho)
 
+def p(i, j):
+    q = 3 - j + i
+    return rho ** q * (1.0 - rho)
 \end{pyconsole}
 Expected number of cabs waiting:
 \begin{pyconsole}
-Lc = sum(j*p(0,j) for j in range(0,4)) 
+Lc = sum(j * p(0, j) for j in range(0, 4))
 # Recall this sums up to 4, not including 4
 Lc
- 
 \end{pyconsole}
 
 
@@ -1201,21 +1203,21 @@ negligible. Truncating at 30 seems reasonable enough:
 
 \begin{pyconsole}
 trunc = 30
-rho**trunc
+rho ** trunc
 \end{pyconsole}
 
 At second thought this is not yet really small. 
 
 \begin{pyconsole}
 trunc = 50
-rho**trunc
+rho ** trunc
 \end{pyconsole}
 
 
 This is better. Now go for what we want to know:
 
 \begin{pyconsole}
-Lp = sum(i*p(i,0) for i in range(trunc))
+Lp = sum(i * p(i, 0) for i in range(trunc))
 Lp
 \end{pyconsole}
 
@@ -1229,7 +1231,7 @@ $\mu$. Similarly (and more formally by the mapping developed in
 part a), for our cab system we also need to use $\lambda$.
 
 \begin{pyconsole}
-Wq = Lc/labda
+Wq = Lc / labda
 Wq
 \end{pyconsole}
 
@@ -1238,19 +1240,17 @@ Thinking in templates is often useful, but makes one sloppy\ldots
 What would be the impact of allowing 4 cabs? Funny question, and with the above, trivial to answer.
 
 \begin{pyconsole}
-def p(i,j):
- q = 4 - j + i
- return rho**q*(1.-rho)
- 
+def p(i, j):
+    q = 4 - j + i
+    return rho ** q * (1.0 - rho)
 \end{pyconsole}
 
 \begin{pyconsole}
-Lc = sum(j*p(0,j) for j in range(0,4))
+Lc = sum(j * p(0, j) for j in range(0, 4))
 Lc
 
-Lp = sum(i*p(i,0) for i in range(trunc))
+Lp = sum(i * p(i, 0) for i in range(trunc))
 Lp
- 
 \end{pyconsole}
 \end{solution}
 \end{exercise}
@@ -1342,15 +1342,14 @@ b = 0
 Q = 0
 
 for k in range(len(a)):
- ds = min(Qs, 4)
- Qs_p = Qs - ds
- Q += a[k]
- dq = min(Q, 1 * (Qs_p == 0))
- Q -= dq
- Qs = (Qs_p > 0) * Qs_p + (Qs_p == 0) * B[b]
- b += Qs_p == 0
- print(f"ds={ds}, Qs_p={Qs_p}, dq={dq}, Q={Q}, Qs={Qs}, b={b}")
-
+    ds = min(Qs, 4)
+    Qs_p = Qs - ds
+    Q += a[k]
+    dq = min(Q, 1 * (Qs_p == 0))
+    Q -= dq
+    Qs = (Qs_p > 0) * Qs_p + (Qs_p == 0) * B[b]
+    b += Qs_p == 0
+    print(f"ds={ds}, Qs_p={Qs_p}, dq={dq}, Q={Q}, Qs={Qs}, b={b}")
 \end{pyverbatim}
 
 \end{solution}
@@ -1371,5 +1370,5 @@ for k in range(len(a)):
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../companion"
+%%% TeX-master: t
 %%% End:

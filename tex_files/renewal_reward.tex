@@ -1,3 +1,12 @@
+% arara: pdflatex
+% arara: clean: { extensions: [ aux, blg, idx, ilg, ind, log, out, pytxcode, rel, toc ] }
+% !arara: clean: { files: [ ans.tex, hint.tex] }
+
+\documentclass[companion]{subfiles}
+
+\begin{document}
+
+
 \section{Renewal Reward Theorem}
 \label{sec:renew-reward-theor}
 
@@ -110,7 +119,11 @@ Use the renewal reward theorem to prove that $\rho = \lambda \E S$ for the rate-
 \begin{equation*}
  \sum_{k=1}^{A(t)} S_k \geq \int_0^t \1{L(s)>0} \d s \geq \sum_{k=1}^{D(t)} S_k.
 \end{equation*}
-Explain this, and complete the argument.
+Explain this, and conclude that 
+\begin{equation}\label{eq:86}
+\lambda \E S \geq \rho \geq \delta \E S.
+\end{equation}
+Hence, if the system is rate-stable, $\delta=\lambda$, and then $\rho = \lambda \E S$. 
 \begin{solution}
 Observe that
 since $t$ can lie half way a service interval and $A(t) \geq D(t)$. As
@@ -120,11 +133,8 @@ $A(t)\to \infty$ as $t\to\infty$,
  \lim_{t\to\infty} \frac{A(t)}t \frac{1}{A(t)} \sum_{k=1}^{A(t)} S_k = 
  \lim_{t\to\infty} \frac{A(t)}t \cdot \lim_{t\to\infty}\frac{1}{A(t)} \sum_{k=1}^{A(t)} S_k = \lambda \E S.
 \end{equation*}
-Applying similar limits to the other inequality gives
-\begin{equation*}
-\lambda \E S \geq \rho \geq \delta \E S.
-\end{equation*}
-Hence, if the system is rate-stable, $\delta=\lambda$, and then $\rho = \lambda \E S$. 
+
+Applying similar limits to the other inequality gives the 
 
 Note that this is in fact the same argument as that underlies the renewal reward theorem. Henceforth we will just use the renewal reward theorem. 
 \end{solution}
@@ -140,10 +150,11 @@ Note that this is in fact the same argument as that underlies the renewal reward
 \subsection*{Solutions}
 \input{ans}
 }
-%\clearpage
+
+\end{document}
 
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../companion"
+%%% TeX-master: t
 %%% End:
