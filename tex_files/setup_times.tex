@@ -24,7 +24,7 @@ First we make a model and provide a list of elements required to compute the exp
 Specifically, we analyze the following batch queueing situation.
 There are two job families, e.g., red and blue, each served by the same single server.
 Jobs arrive at rate $\lambda_r$ and $\lambda_b$, respectively, so that the arrival rate of jobs is $\lambda= \lambda_b+\lambda_r$.
-Jobs of both types require an average \recall{net processing time} of $\E S_0$, provided the server is already setup for the correct job color.
+Jobs of both types require an average \recall{net processing time} of $\E{S_0}$, provided the server is already setup for the correct job color.
 The setup times $\{R_i\}$ are assumed to form an i.i.d.
 sequence with common random variable $R$ and independent of $S_0$.
 The sojourn time comprises the following steps.
@@ -38,7 +38,7 @@ Finally, once a job is finished, it can leave the system; as a consequence, it d
 
 
 \begin{exercise}\clabel{ex:48}
-  Show that the average time needed to form (or assemble) a batch is given by
+  Show that the average time a job has to wait for the assembling of a batch is given by
 \begin{equation}\label{eq:79}
  \E{W_r} = \frac{B-1}{2\lambda_r}.
 \end{equation}
@@ -147,7 +147,7 @@ Observe that we now have all elements to fill in Sakasegawa's formula, which bec
 \end{equation*}
 
 It is left to find a rule to determine what happens to an item once the batch to which the item belongs enters service.
-If the job has to wait until all jobs in the batch are served, the time an item spends at the server is $\E R + B \E{S_0}$.
+If the job has to wait until all jobs in the batch are served, the expected time an item spends at the server is $\E R + B \E{S_0}$.
 
 
 \begin{exercise}\clabel{ex:492}
