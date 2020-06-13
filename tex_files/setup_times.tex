@@ -1,3 +1,11 @@
+% arara: pdflatex
+% arara: clean: { extensions: [ aux, blg, idx, ilg, ind, log, out, pytxcode, rel, toc ] }
+% !arara: clean: { files: [ ans.tex, hint.tex] }
+
+\documentclass[companion]{subfiles}
+
+\begin{document}
+
 \section{Setups and Batch Processing}
 \label{sec:setups-batch-proc}
 
@@ -38,7 +46,7 @@ Finally, once a job is finished, it can leave the system; as a consequence, it d
 
 
 \begin{exercise}\clabel{ex:48}
-  Show that the average time a job has to wait for the assembling of a batch is given by
+  Show that the average time a job has to wait to fill the batch (to which this jobs belongs) is given by
 \begin{equation}\label{eq:79}
  \E{W_r} = \frac{B-1}{2\lambda_r}.
 \end{equation}
@@ -317,6 +325,8 @@ Here are some questions to help you interpret this formulation.
 \subsection*{Solutions}
 \input{ans}
 }
+\end{document}
+
 %\clearpage
 
 %%% Local Variables:

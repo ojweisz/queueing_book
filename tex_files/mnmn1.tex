@@ -1,5 +1,14 @@
-\section
-{$M(n)/M(n)/1$ Queue}
+% arara: pdflatex
+% arara: pythontex: {verbose: yes, rerun: modified }
+% arara: pdflatex
+% arara: clean: { extensions: [ aux, blg, idx, ilg, ind, log, out, pytxcode, rel, toc ] }
+% !arara: clean: { files: [ ans.tex, hint.tex] }
+
+\documentclass[companion]{subfiles}
+
+\begin{document}
+
+\section{$M(n)/M(n)/1$ Queue}
 %{$\mathbf{M(n)/M(n)/1}$ Queue}
 \label{sec:mnmn1}
 
@@ -999,14 +1008,15 @@ I just convert the formulas of~\cref{ex:7} to Python code. This saves
 me time during the computations.
 
 \begin{pyconsole}
-def WQ(c, labda, ES):
-    from math import factorial
+from math import factorial
 
+def WQ(c, labda, ES):
     rho = labda * ES / c
     G = sum([(c * rho) ** n / factorial(n) for n in range(c)])
     G += (c * rho) ** c / (1.0 - rho) / factorial(c)
     Lq = (c * rho) ** c / (factorial(c) * G) * rho / (1.0 - rho) ** 2
     return Lq / labda  # Wq, Little's law
+
 \end{pyconsole} 
 
 Considering the scenario with one server is superfluous as $\rho>1$ in
@@ -1187,6 +1197,7 @@ rho = labda / mu
 def p(i, j):
     q = 3 - j + i
     return rho ** q * (1.0 - rho)
+
 \end{pyconsole}
 Expected number of cabs waiting:
 \begin{pyconsole}
@@ -1243,6 +1254,7 @@ What would be the impact of allowing 4 cabs? Funny question, and with the above,
 def p(i, j):
     q = 4 - j + i
     return rho ** q * (1.0 - rho)
+
 \end{pyconsole}
 
 \begin{pyconsole}
@@ -1350,6 +1362,7 @@ for k in range(len(a)):
     Qs = (Qs_p > 0) * Qs_p + (Qs_p == 0) * B[b]
     b += Qs_p == 0
     print(f"ds={ds}, Qs_p={Qs_p}, dq={dq}, Q={Q}, Qs={Qs}, b={b}")
+
 \end{pyverbatim}
 
 \end{solution}
@@ -1365,6 +1378,8 @@ for k in range(len(a)):
 \subsection*{Solutions}
 \input{ans}
 }
+
+\end{document}
 
 %\clearpage
 
