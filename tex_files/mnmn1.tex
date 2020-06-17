@@ -1010,6 +1010,7 @@ me time during the computations.
 \begin{pyconsole}
 from math import factorial
 
+
 def WQ(c, labda, ES):
     rho = labda * ES / c
     G = sum([(c * rho) ** n / factorial(n) for n in range(c)])
@@ -1017,6 +1018,8 @@ def WQ(c, labda, ES):
     Lq = (c * rho) ** c / (factorial(c) * G) * rho / (1.0 - rho) ** 2
     return Lq / labda  # Wq, Little's law
 
+
+#
 \end{pyconsole} 
 
 Considering the scenario with one server is superfluous as $\rho>1$ in
@@ -1198,6 +1201,8 @@ def p(i, j):
     q = 3 - j + i
     return rho ** q * (1.0 - rho)
 
+
+#
 \end{pyconsole}
 Expected number of cabs waiting:
 \begin{pyconsole}
@@ -1255,6 +1260,8 @@ def p(i, j):
     q = 4 - j + i
     return rho ** q * (1.0 - rho)
 
+
+#
 \end{pyconsole}
 
 \begin{pyconsole}
@@ -1363,6 +1370,7 @@ for k in range(len(a)):
     b += Qs_p == 0
     print(f"ds={ds}, Qs_p={Qs_p}, dq={dq}, Q={Q}, Qs={Qs}, b={b}")
 
+#
 \end{pyverbatim}
 
 \end{solution}
